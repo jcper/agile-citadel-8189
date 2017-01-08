@@ -1,14 +1,162 @@
-<html>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <div class="col-sm-12">
+      <div class="well">
+        <h2>SISTEMA INTEGRADO ALARMAS 24(SIA24)</h2>
+        <h4>alarma=0 =>Sin alarma; alarma=1 =>CPU; alarma=2 =>Ram</h4>
     <p id='server-time'></p>
-    <script>
-      var HOST = location.origin.replace(/^http/, 'ws')
+     <script>
+    
+      var HOST = location.origin.replace(/^http/, 'ws');
       var ws = new WebSocket(HOST);
-      var el = document.getElementById('server-time');
-
+      var server=document.getElementById('server-time');
+      var indice=1;
+      var usuarios=[];
+      var creado=false;
+      var miregistro=1;
+        
       ws.onmessage = function (event) {
-        el.innerHTML = 'Server time: ' + event.data;
+   
+      var table = document.getElementById('myTable');
+        var message = JSON.parse(event.data);
+        var  usuario={
+            name: message.name,
+            registro: indice
+        };
+
+    
+      if (usuarios.length !==0){
+        for (var i=0; i<usuarios.length; i++){
+             var usuarioAct=usuarios[i];
+          if(message.name===usuarioAct.name){
+             creado=true;
+             miregistro=usuarioAct.registro;
+            
+          }else{
+        usuarios.push(usuario);
+        indice++;
+        var row = table.insertRow(indice);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.alarma;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = "NEW CELL2";
+          };
+        };
+       }else{
+        usuarios.push(usuario);
+        
+        var row = table.insertRow(indice);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.alarma;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = "NEW CELL2";
+        indice++;
+         };
+        
+        if(creado){
+         document.getElementById("myTable").deleteRow(miregistro);
+        var row =  table.insertRow(miregistro);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.alarma;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = "NEW CELL2";
+        creado=false;
+        indice++;
+        };
+
       };
-    </script>
-  </body>
+
+      function sendMessageRestaurar() {
+        var message1 = {};
+        message1.comando =restaurar;
+        message1.text = document.getElementById("restaurar").value;
+        ws.send(JSON.stringify(message1));
+        document.getElementById("restaurar").value = "";//Se limpia el buffer
+      }
+
+      function sendMessageNotificar() {
+        var message2 = {};
+        message2.comando =notificar;
+        message2.text = document.getElementById("notificar").value;
+        ws.send(JSON.stringify(message2));
+        document.getElementById("notificar").value = "";//Se limpia el buffer
+      }
+
+        function sendMessageBuscar() {
+        var message3 = {};
+        message3.comando =buscar;
+        message3.text = document.getElementById("buscar").value;
+        ws.send(JSON.stringify(message3));
+        document.getElementById("buscar").value = "";//Se limpia el buffer
+      }
+    
+    </script> 
+  </div>
+
+ <div class="col-sm-4">
+  <form class="form-inline">
+  <div class="form-group">
+  <input type="text" class="form-control" id="buscar">
+   <button type="button" class="btn btn-success" onclick="sendMessageBuscar()">buscar</button>
+   </div> 
+  </div> 
+
+ <div class="col-sm-4">
+ <input type="text" class="form-control" id="restaurar">
+ <button type="button" class="btn btn-info" onclick="sendMessageRestaurar()">Restaurar</button>
+ </div> 
+
+<div class="col-sm-4">
+  <input type="text" class="form-control" id="notificar">
+   <button type="button" class="btn btn-warning" onclick="sendMessageNotificar()">Notificar</button>
+ </div>
+<div class="col-sm-4" id='TablaEquipos'>
+  <h3>Equipos en curso</h3>         
+  <table class="table table-bordered" id='myTable'>
+    <thead>
+      <tr>
+        <th>Equipo</th>
+        <th>Alarmas</th>
+        <th>Fecha</th>
+        <th>Ubicacion</th>
+      </tr>
+    </thead>
+    </table>
+    <button type="button" class="btn btn-danger">Borrar</button>
+</div>
+<div class="col-sm-4">
+  <h3>Alarmas por equipo</h3>         
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Equipo</th>
+        <th>Alarmas</th>
+        <th>Fecha</th>
+        <th>Ubicacion</th>
+      </tr>
+    </thead>
+    </table>
+</div>
+
+</body>
 </html>

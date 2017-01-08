@@ -3,8 +3,10 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
+var alarma;
+var Fecha=new Date().toTimeString();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
 
 const server = express()
@@ -13,13 +15,23 @@ const server = express()
 
 const wss = new SocketServer({ server });
 
-wss.on('connection', (ws) => {
-  console.log('Client connected');
-  ws.on('close', () => console.log('Client disconnected'));
+wss.on('connection', function(ws) {
+    ws.on('message', function(message) {
+        console.log('received: %s', message);
+        alarma=message;
+        
+    });
+    
 });
+
+
 
 setInterval(() => {
   wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString());
+    client.send(alarma);
   });
 }, 1000);
+
+
+
+  
