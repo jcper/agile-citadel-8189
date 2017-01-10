@@ -87,27 +87,34 @@
       };
 
       function sendMessageRestaurar() {
-        var message1 = {};
-        message1.comando =restaurar;
+        var message1 = restaurar;
         message1.text = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(message1));
         document.getElementById("restaurar").value = "";//Se limpia el buffer
       }
 
       function sendMessageNotificar() {
-        var message2 = {};
-        message2.comando =notificar;
+        var message2 =notificar;
         message2.text = document.getElementById("notificar").value;
         ws.send(JSON.stringify(message2));
         document.getElementById("notificar").value = "";//Se limpia el buffer
       }
 
         function sendMessageBuscar() {
-        var message3 = {};
-        message3.comando =buscar;
+        var message3 = buscar;
         message3.text = document.getElementById("buscar").value;
         ws.send(JSON.stringify(message3));
         document.getElementById("buscar").value = "";//Se limpia el buffer
+      }
+
+      function BorrarTablaEquipo(){
+     var Table = document.getElementById("mytable");
+     Table.innerHTML = "";
+      }
+
+      function BorrarTablaNotificaciones(){
+     var Table = document.getElementById("mytable2");
+     Table.innerHTML = "";
       }
     
     </script> 
@@ -142,20 +149,21 @@
       </tr>
     </thead>
     </table>
-    <button type="button" class="btn btn-danger">Borrar</button>
+    <button type="button" class="btn btn-danger" onclick="BorrarTablaEquipo()">Borrar</button>
 </div>
 <div class="col-sm-4">
-  <h3>Alarmas por equipo</h3>         
-  <table class="table table-bordered">
+  <h3>Notificaciones en curso</h3>         
+  <table class="table table-bordered" id='myTable2'>
     <thead>
       <tr>
         <th>Equipo</th>
-        <th>Alarmas</th>
+        <th>Notificacion</th>
         <th>Fecha</th>
         <th>Ubicacion</th>
       </tr>
     </thead>
     </table>
+    <button type="button" class="btn btn-danger" onclick="BorrarTablaNotificaciones()">Borrar</button>
 </div>
 
 </body>
