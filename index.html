@@ -87,21 +87,24 @@
       };
 
       function sendMessageRestaurar() {
-        var message1 = restaurar;
-        message1.text = document.getElementById("restaurar").value;
+        var message={};
+        message.comando=restaurar;
+        message.text = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(message1));
         document.getElementById("restaurar").value = "";//Se limpia el buffer
       }
 
       function sendMessageNotificar() {
-        var message2 =notificar;
-        message2.text = document.getElementById("notificar").value;
+        var message ={};
+        message.comando=notificar;
+        message.text = document.getElementById("notificar").value;
         ws.send(JSON.stringify(message2));
         document.getElementById("notificar").value = "";//Se limpia el buffer
       }
 
         function sendMessageBuscar() {
-        var message3 = buscar;
+        var message3 ={};
+        message.comando=buscar;
         message3.text = document.getElementById("buscar").value;
         ws.send(JSON.stringify(message3));
         document.getElementById("buscar").value = "";//Se limpia el buffer
@@ -149,7 +152,7 @@
       </tr>
     </thead>
     </table>
-    <button type="button" class="btn btn-danger" onclick="BorrarTablaEquipo()">Borrar</button>
+   
 </div>
 <div class="col-sm-4">
   <h3>Notificaciones en curso</h3>         
@@ -163,7 +166,7 @@
       </tr>
     </thead>
     </table>
-    <button type="button" class="btn btn-danger" onclick="BorrarTablaNotificaciones()">Borrar</button>
+   
 </div>
 
 </body>
