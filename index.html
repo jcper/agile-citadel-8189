@@ -19,6 +19,7 @@
       var ws = new WebSocket(HOST);
       var server=document.getElementById('server-time');
       var indice=1;
+      var indiceN=1;
       var usuarios=[];
       var creado=false;
       var miregistro=1;
@@ -31,7 +32,34 @@
             name: message.name,
             registro: indice
         };
+       if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
+        var table2=document.getElementById('myTable2');
+         if(i===1){
+           var row = table2.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.comando;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        }else{
+          indiceN++;
+         var row = table2.insertRow(indiceN);  
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.comando;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+         }
 
+
+
+       }
     
       if (usuarios.length !==0){
         for (var i=0; i<usuarios.length; i++){
@@ -109,6 +137,8 @@
         ws.send(JSON.stringify(comando3));
         document.getElementById("buscar").value = "";//Se limpia el buffer
       }
+
+
 
     </script> 
   </div>
