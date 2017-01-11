@@ -88,7 +88,7 @@
 
       function sendMessageRestaurar() {
         var comando1={};
-         comando1.comando=restaurar;
+         comando1.comando='restaurar';
          comando1.user = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(comando1));
         document.getElementById("restaurar").value = "";//Se limpia el buffer
@@ -96,7 +96,7 @@
 
       function sendMessageNotificar() {
         var comando2={};
-        comando2.comando=notificar;
+        comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
         document.getElementById("notificar").value = "";//Se limpia el buffer
@@ -104,7 +104,7 @@
 
         function sendMessageBuscar() {
         var comando3 ={};
-        comando3.comando=buscar;
+        comando3.comando='buscar';
         comando3.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando3));
         document.getElementById("buscar").value = "";//Se limpia el buffer
