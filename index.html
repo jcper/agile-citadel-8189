@@ -28,6 +28,7 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
+        if(message.name!==undefined){
         var  usuario={
             name: message.name,
             registro: indice,
@@ -110,9 +111,11 @@
         cell4.innerHTML = message.ip;
         creado=false;
         indice++;
+          };
         };
-
       };
+
+
 
       function sendMessageRestaurar() {
         var comando1={};
