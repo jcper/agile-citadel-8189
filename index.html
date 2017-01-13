@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+1<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -30,7 +30,8 @@
         var message = JSON.parse(event.data);
         var  usuario={
             name: message.name,
-            registro: indice
+            registro: indice,
+            alarma:message.alarma
         };
 
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
@@ -63,7 +64,7 @@
       if (usuarios.length !==0){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
-          if(message.name===usuarioAct.name){
+          if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
              creado=true;
              miregistro=usuarioAct.registro;
             
