@@ -85,7 +85,7 @@
         };
        }else{
         usuarios.push(usuario);
-        indice++;
+        alert("prueba");
         var row= table.insertRow(indice);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -95,6 +95,7 @@
         cell2.innerHTML = message.alarma;
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
+         indice++;
          };
         
         if(creado){
