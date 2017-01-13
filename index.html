@@ -62,7 +62,7 @@
          };
         };
     
-      if (usuarios.length !==0){
+      if (usuarios.length===0){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
           if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
@@ -85,7 +85,6 @@
         };
        }else{
         usuarios.push(usuario);
-        alert("prueba");
         var row= table.insertRow(indice);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
