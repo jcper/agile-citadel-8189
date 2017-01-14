@@ -34,7 +34,7 @@
             registro: indice,
             alarma:message.alarma
         };
-
+         alert(indice);
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
         var table2=document.getElementById('myTable2');
          if(indiceN==1){
@@ -68,7 +68,7 @@
           if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
              creado=true;
              miregistro=usuarioAct.registro;
-            
+             alert(message.name);
           }else{
         usuarios.push(usuario);
         indice++;
