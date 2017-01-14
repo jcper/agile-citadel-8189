@@ -30,7 +30,7 @@ setInterval(() => {
   wss.clients.forEach((client) => {
     client.send(alarma);
   });
-}, 10000);
+},5000);
 
 
 
