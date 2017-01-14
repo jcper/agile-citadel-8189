@@ -74,6 +74,7 @@
         };
        
         }else{
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined){
         usuarios.push(usuario);
         var row= table.insertRow(indiceTB);
         var cell1 = row.insertCell(0);
@@ -87,8 +88,9 @@
          indiceTB++;
          indice++;
          };
-        
+        };
         if(creado){
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
         var cell1 = row.insertCell(0);
@@ -101,7 +103,9 @@
         cell4.innerHTML = message.ip;
         creado=false;
         indice++;
+        };
           }else{
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined){
         usuarios.push(usuario);
         indice++;
         var row = table.insertRow(indiceTB);
@@ -114,6 +118,7 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceTB++;
+             };
           };
         };
       };
