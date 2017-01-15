@@ -19,7 +19,6 @@ wss.on('connection', function(ws) {
 	  console.log('client conected');
     ws.on('message', function(message) {
         console.log('received: %s', message);
-        
         alarma=message;
           
        });
