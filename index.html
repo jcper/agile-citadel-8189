@@ -35,8 +35,9 @@
             registro: indice,
             alarma:message.alarma
         };
-         alert(indice);
+        
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
+
         var table2=document.getElementById('myTable2');
          if(indiceN==1){
         var row = table2.insertRow(1);
@@ -49,6 +50,24 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceN++;
+        
+        if(message.comando==='notificar'){
+         
+         function sendNotificarNotificar(message.name); 
+        };
+
+        if(message.comando==='buscar'){
+         
+         function sendNotificarBuscar(message.name); 
+        };
+        
+          if(message.comando==='restaurar'){
+         
+         function sendNotificarRestaurar(message.name); 
+        };
+
+
+
         }else{
          var row = table2.insertRow(indiceN);  
         var cell1 = row.insertCell(0);
@@ -60,8 +79,23 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceN++;
-         };
+        if(message.comando==='notificar'){
+         
+         function sendNotificarNotificar(message.name); 
         };
+
+        if(message.comando==='buscar'){
+         
+         function sendNotificarBuscar(message.name); 
+        };
+        
+          if(message.comando==='restaurar'){
+         
+         function sendNotificarRestaurar(message.name); 
+        };
+
+      };
+    };
     
       //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
@@ -73,22 +107,7 @@
           };
         };
        
-        //}
-        //else{
-        //if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined){
-       // usuarios.push(usuario);
-       // var row= table.insertRow(indiceTB);
-       // var cell1 = row.insertCell(0);
-       // var cell2 = row.insertCell(1);
-       // var cell3 = row.insertCell(2);
-       // var cell4 = row.insertCell(3);
-       // cell1.innerHTML = message.name;
-       // cell2.innerHTML = message.alarma;
-       // cell3.innerHTML = message.date;
-       //  cell4.innerHTML = message.ip;
-       //  indice++;
-       //  };
-       // };
+      
         if(creado){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined){
          document.getElementById("myTable").deleteRow(miregistro);
@@ -133,12 +152,33 @@
         document.getElementById("restaurar").value = "";//Se limpia el buffer
       }
 
+       function sendNotificarRestaurar(user) {
+        var comando1={};
+         comando1.comando='NCR';
+         comando1.user = user
+        ws.send(JSON.stringify(comando1));
+      }
+    
       function sendMessageNotificar() {
         var comando2={};
         comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
         document.getElementById("notificar").value = "";//Se limpia el buffer
+      }
+
+       function sendNotificarNotificar(user) {
+        var comando2={};
+        comando2.comando='NCN';
+        comando2.user = user;
+        ws.send(JSON.stringify(comando2));
+      }
+
+        function sendNotificarBuscar(user) {
+        var comando3 ={};
+        comando3.comando='buscar';
+        comando3.user = user;
+        ws.send(JSON.stringify(comando3));
       }
 
         function sendMessageBuscar() {

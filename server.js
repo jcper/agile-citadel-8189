@@ -4,7 +4,6 @@ const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
 var alarma;
-var notificacion;
 var Fecha=new Date().toTimeString();
 
 const PORT = process.env.PORT || 3001;
@@ -20,7 +19,7 @@ wss.on('connection', function(ws) {
 	  console.log('client conected');
     ws.on('message', function(message) {
         console.log('received: %s', message);
-        notificacion=message;
+        
         alarma=message;
           
        });
@@ -32,11 +31,8 @@ wss.on('connection', function(ws) {
 
 setInterval(() => {
   wss.clients.forEach((client) => {
-  	if(alarma.comando!==undefined){
-  		client.send(alarma);
-  	}else{
-  		client.send(notificacion);
-  	 }
+  	client.send(alarma);
+  	
    });
 },1000);
 
