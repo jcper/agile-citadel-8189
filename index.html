@@ -68,7 +68,7 @@
         indiceN++;
        
 
-      };
+      
     };
     
       //if (indice!==1){
@@ -116,7 +116,7 @@
         };
       };
 
-
+    
 
       function sendMessageRestaurar() {
         var comando1={};
@@ -126,12 +126,7 @@
         document.getElementById("restaurar").value = "";//Se limpia el buffer
       }
 
-       function sendNotificarRestaurar(user) {
-        var comando1={};
-         comando1.comando='NCR';
-         comando1.user = user
-        ws.send(JSON.stringify(comando1));
-      }
+      
     
       function sendMessageNotificar() {
         var comando2={};
@@ -141,19 +136,9 @@
         document.getElementById("notificar").value = "";//Se limpia el buffer
       }
 
-       function sendNotificarNotificar(user) {
-        var comando2={};
-        comando2.comando='NCN';
-        comando2.user = user;
-        ws.send(JSON.stringify(comando2));
-      }
+      
 
-        function sendNotificarBuscar(user) {
-        var comando3 ={};
-        comando3.comando='buscar';
-        comando3.user = user;
-        ws.send(JSON.stringify(comando3));
-      }
+      
 
         function sendMessageBuscar() {
         var comando3 ={};
