@@ -34,7 +34,7 @@
             name: message.name,
             registro: indice,
             alarma:message.alarma
-        };
+        };1
         
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
 
@@ -51,11 +51,7 @@
         cell4.innerHTML = message.ip;
         indiceN++;
      
-        };
-
-
-
-        }else{
+       }else{
          var row = table2.insertRow(indiceN);  
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -66,10 +62,9 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceN++;
-       
+       };
 
-      
-    };
+     };
     
       //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
@@ -82,8 +77,8 @@
         };
        
       
-        if(creado){
-        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined){
+        if(creado){2
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando===undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
         var cell1 = row.insertCell(0);
@@ -98,7 +93,7 @@
         indice++;
         };
           }else{
-        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined){
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined ||message.comando===undefined){
         usuarios.push(usuario);
         indice++;
         var row = table.insertRow(indiceTB);
