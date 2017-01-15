@@ -20,11 +20,9 @@ wss.on('connection', function(ws) {
 	  console.log('client conected');
     ws.on('message', function(message) {
         console.log('received: %s', message);
-        if(message.comando=='buscar' || message.comando=='notificar' || message.comando=='restaurar'){
-        	notificacion=message;
-        }else{
+        notificacion=message;
         alarma=message;
-          }
+          
        });
     ws.on('close',() =>console.log('client disconected'));
 });
