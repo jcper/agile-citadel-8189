@@ -31,10 +31,6 @@ wss.on('connection', function(ws) {
 
 setInterval(() => {
   wss.clients.forEach((client) => {
-  	 if(alarma===""){
-        alarma="REINICIO SERVICIO";
-           console.log('reinicio servicio');
-        };	
   	client.send(alarma);
   	
    });
