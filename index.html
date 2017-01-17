@@ -30,11 +30,12 @@
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
         if(message.name!==undefined){
+
         var  usuario={
             name: message.name,
             registro: indice,
             alarma:message.alarma
-        };1
+        };
         
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
 
@@ -77,7 +78,7 @@
         };
        
       
-        if(creado){2
+        if(creado){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando===undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);

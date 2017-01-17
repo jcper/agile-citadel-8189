@@ -17,11 +17,12 @@ const wss = new SocketServer({ server });
 
 wss.on('connection', function(ws) {
 	  console.log('client conected');
+
     ws.on('message', function(message) {
         console.log('received: %s', message);
         alarma=message;
-          
-       });
+      });
+        }
     ws.on('close',() =>console.log('client disconected'));
 });
 
@@ -30,6 +31,10 @@ wss.on('connection', function(ws) {
 
 setInterval(() => {
   wss.clients.forEach((client) => {
+  	 if(alarma===""){
+        alarma="REINICIO SERVICIO";
+           console.log('reinicio servicio');
+        };	
   	client.send(alarma);
   	
    });
