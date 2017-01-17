@@ -22,7 +22,7 @@ wss.on('connection', function(ws) {
         console.log('received: %s', message);
         alarma=message;
       });
-        }
+        
     ws.on('close',() =>console.log('client disconected'));
 });
 
