@@ -68,7 +68,7 @@
 
      };
     
-      //if (indice!==1){
+      if (message.comando===undefined){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
           if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
@@ -77,7 +77,7 @@
             
           };
         };
-       
+       };
       
         if(creado){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando===undefined){
