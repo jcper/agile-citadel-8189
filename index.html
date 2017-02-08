@@ -11,7 +11,7 @@
  <div class="col-sm-12">
       <div class="well">
         <h2>SISTEMA INTEGRADO ALARMAS 24(SIA24)</h2>
-        <h4>alarma=0 =>Sin alarma; alarma=1 =>CPU; alarma=2 =>Ram</h4>
+
     <p id='server-time'></p>
      <script>
     
@@ -29,7 +29,8 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
-        if(message.name!==undefined){
+        if(message.name!==undefined || message.alarma!==undefined){
+
 
         var  usuario={
             name: message.name,
@@ -180,8 +181,37 @@
     </table>
    
 </div>
+<div class="col-sm-4" id='TiposAlarma'>
+  <h3>Tipos De Alarma</h3>         
+  <table class="table table-bordered" id='myTable3'>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Nivel</th>
+        <th>Optimo</th>
+        </tr>
+    </thead
+     <tbody>
+      <tr>
+        <td>Alarma 0</td>
+        <td>Sin Alarma</td>
+        <td>Ram Libre +1gb/Cpu Load <80%</td>
+      </tr>
+      <tr>
+        <td>Alarma 1</td>
+        <td>CPU 80%</td>
+        <td>CPU 50%</td>
+      </tr>
+      <tr>
+        <td>Alarma 2</td>
+        <td>Ram Libre 1gb</td>
+        <td>Ram Libre 1,5gb</td>
+      </tr>
+    </tbody>
+    </table>
+</div>
 <div class="col-sm-4">
-  <h3>Notificaciones en curso</h3>         
+  <h3>Notificaciones</h3>         
   <table class="table table-bordered" id='myTable2'>
     <thead>
       <tr>
