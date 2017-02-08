@@ -29,7 +29,8 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
-        if(message.name!==undefined || message.alarma!=='undefined'){
+        if(message.name!==undefined || message.alarma!==undefined || message.comando!=='notificar' || message.comando!=='buscar' ||
+          message.comando!=='restaurar'){
 
         alert(message.alarma);
         var  usuario={
@@ -38,7 +39,7 @@
             alarma:message.alarma
         };
         
-       if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
+       if(message.comando==='notificar' || message.comando==='buscar'  ) {
 
         var table2=document.getElementById('myTable2');
          if(indiceN==1){
