@@ -31,7 +31,7 @@
         var message = JSON.parse(event.data);
         if(message.name!==undefined || message.alarma!==undefined && message.comando===undefined){
 
-
+        alert(message.alarma);
         var  usuario={
             name: message.name,
             registro: indice,
