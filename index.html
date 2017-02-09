@@ -24,6 +24,7 @@
       var usuarios=[];
       var creado=false;
       var miregistro=1;
+      var nopintarN=false;
         
       ws.onmessage = function (event) {
    
@@ -66,6 +67,7 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceN++;
+        nopintarN=true;//Esto booleano no escribe la notificacion en los equipos en curso.
        };
 
      };
@@ -81,7 +83,7 @@
         };
        
       
-        if(creado){
+        if(creado && !nopintarN){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando!==undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
@@ -113,6 +115,7 @@
              };
           };
         };
+        nopintarN=false;
       };
 
     
