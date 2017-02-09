@@ -82,7 +82,7 @@
        
       
         if(creado){
-        if(message.name !==undefined || message.alarma !=='undefined' || message.date!==undefined || message.ip !==undefined || message.comando===undefined){
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando!==undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
         var cell1 = row.insertCell(0);
@@ -97,7 +97,7 @@
         indice++;
         };
           }else{
-        if(message.name !==undefined || message.alarma !=='undefined' || message.date!==undefined || message.ip!==undefined ||message.comando===undefined){
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined ||message.comando!==undefined){
         usuarios.push(usuario);
         indice++;
         var row = table.insertRow(indiceTB);
