@@ -38,7 +38,7 @@
             alarma:message.alarma
         };
         
-       if(message.comando==='notificar' || message.comando==='buscar'  message.comando==='restaurar' && message.name!==undefined) {
+       if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
 
         var table2=document.getElementById('myTable2');
          if(indiceN==1){
@@ -68,7 +68,7 @@
 
      };
     
-     
+      //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
           if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
