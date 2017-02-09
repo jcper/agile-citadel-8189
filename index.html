@@ -81,8 +81,8 @@
           };
         };
        
-      
-        if(creado && !nopintarN){
+        if(!nopintarN){
+        if(creado){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando!==undefined){
          document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
@@ -114,6 +114,7 @@
              };
           };
         };
+      };
         nopintarN=false;
       };
 
