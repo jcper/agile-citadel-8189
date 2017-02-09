@@ -32,12 +32,14 @@
         if(message.name!==undefined || message.alarma!==undefined){
 
         alert(message.alarma);
+        if(message.alarma!=='undefined'){//esto para no crear usuario de la notificacion
         var  usuario={
             name: message.name,
             registro: indice,
             alarma:message.alarma
         };
-        
+       }; 
+
        if(message.comando==='notificar' || message.comando==='buscar' || message.comando==='restaurar') {
 
         var table2=document.getElementById('myTable2');
