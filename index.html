@@ -139,10 +139,10 @@
       }
 
        function sendMessageDesactivacion() {
-        var comando2={};
-        comando2.comando='desactivar';
-        comando2.user = document.getElementById("notificar").value;
-        ws.send(JSON.stringify(comando2));
+        var comando4={};
+        comando4.comando='desactivar';
+        comando4.user = document.getElementById("notificar").value;
+        ws.send(JSON.stringify(comando4));
         document.getElementById("notificar").value = "";//Se limpia el buffer
       }
 
