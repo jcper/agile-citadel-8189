@@ -32,7 +32,7 @@
         var message = JSON.parse(event.data);
         if(message.name!==undefined || message.alarma!==undefined){
 
-        alert(message.alarma);
+        //alert(message.alarma);
         if(message.alarma!=='undefined'){//esto para no crear usuario de la notificacion
         var  usuario={
             name: message.name,
@@ -138,7 +138,13 @@
         document.getElementById("notificar").value = "";//Se limpia el buffer
       }
 
-      
+       function sendMessageDesactivacion() {
+        var comando2={};
+        comando2.comando='desactivacion';
+        comando2.user = document.getElementById("notificar").value;
+        ws.send(JSON.stringify(comando2));
+        document.getElementById("notificar").value = "";//Se limpia el buffer
+      }
 
       
 
@@ -171,6 +177,7 @@
 <div class="col-sm-4">
   <input type="text" class="form-control" id="notificar" placeholder="Introduce nombre equipo">
    <button type="button" class="btn btn-warning" onclick="sendMessageNotificar()">Notificar</button>
+   <button type="button" class="btn btn-warning" onclick="sendMessageDesactivacion()">Desactivacion</button>
  </div>
 <div class="col-sm-4" id='TablaEquipos'>
   <h3>Equipos en curso</h3>         
