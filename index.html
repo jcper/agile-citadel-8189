@@ -192,8 +192,7 @@
         ws.send(JSON.stringify(comando3));
         var tiempoComandoB= new Date(milliseconds)+30000;
         var contadorB=0;
-        var contadorB=0;
-        while(contador<3){
+        while(contadorB<3){
         if(TiempoComandoB==new Date(millisecons) && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
@@ -201,7 +200,7 @@
            document.getElementById("buscar").value = "wait";
              ws.send(JSON.stringify(comando3));
              tiempoComandoB= new Date(milliseconds)+30000;
-             contadorN++;
+             contadorB++;
           }
          }
 
