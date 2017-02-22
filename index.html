@@ -203,10 +203,11 @@
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
-           document.getElementById("buscar").value = "wait";
+           document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando3));
              tiempoComandoB=new Date();
              tiempoComandoB.getTime()+30000;
+             alert('comandod recibido');
              contadorB++;
           }
          }
