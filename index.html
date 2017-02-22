@@ -128,7 +128,7 @@
          var tiempoComandoR= new Date(milliseconds)+30000;
          var contadorR=0;
          while(contadorR<3){
-        if(TiempoComandoR==new Date(millisecons) && message.commando=='restaurar' ){
+        if(new Date(millisecons)<TiempoComandoR && message.commando=='restaurar' ){
          document.getElementById("restaurar").value = "";//Se limpia el buffer 
           contador=3;
         }else{
@@ -150,7 +150,7 @@
          var tiempoComandoN= new Date(milliseconds)+30000;
          var contadorN=0;
          while(contadorN<3){
-        if(TiempoComandoN==new Date(millisecons) && message.commando=='notificar0' ){
+        if(new Date(millisecons)<TiempoComandoN && message.commando=='notificar0' ){
          document.getElementById("notificar").value = "";//Se limpia el buffer
            contadorN=3; 
         }else{
@@ -171,7 +171,7 @@
         var tiempoComando= new Date(milliseconds)+30000;
         var contador=0;
         while(contador<3){
-        if(TiempoComando==new Date(millisecons) && message.commando=='desactivar'){
+        if(new Date(millisecons)<TiempoComando && message.commando=='desactivar'){
          document.getElementById("notificar").value = "";//Se limpia el buffer
             contador=3 
         }else{
@@ -193,7 +193,7 @@
         var tiempoComandoB= new Date(milliseconds)+30000;
         var contadorB=0;
         while(contadorB<3){
-        if(TiempoComandoB==new Date(millisecons) && message.commando=='buscar' ){
+        if(new Date(millisecons)<TiempoComandoB && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
