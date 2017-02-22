@@ -125,7 +125,19 @@
          comando1.comando='restaurar';
          comando1.user = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(comando1));
-        document.getElementById("restaurar").value = "";//Se limpia el buffer
+         var tiempoComandoR= new Date(milliseconds)+30000;
+         var contadorR=0;
+         while(contadorR<3){
+        if(TiempoComandoR==new Date(millisecons) && message.commando=='restaurar' ){
+         document.getElementById("restaurar").value = "";//Se limpia el buffer 
+          contador=3;
+        }else{
+           document.getElementById("restaurar").value = "wait";
+             ws.send(JSON.stringify(comando1));
+             tiempoComandoR= new Date(milliseconds)+30000;
+             contadorR++;
+          }
+         }
       }
 
       
@@ -135,15 +147,40 @@
         comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
-        document.getElementById("notificar").value = "";//Se limpia el buffer
+         var tiempoComandoN= new Date(milliseconds)+30000;
+         var contadorN=0;
+         while(contadorN<3){
+        if(TiempoComandoN==new Date(millisecons) && message.commando=='notificar' ){
+         document.getElementById("notificar").value = "";//Se limpia el buffer
+           contadorN=3; 
+        }else{
+           document.getElementById("notificar").value = "wait";
+             ws.send(JSON.stringify(comando2));
+             tiempoComandoN= new Date(milliseconds)+30000;
+             contadorN++;
+          }
+         }
+        
       }
 
        function sendMessageDesactivacion() {
         var comando4={};
         comando4.comando='desactivar';
-        comando4.user = document.getElementById("notificar").value;
+        comando4.user = document.getElementById("desactivar").value;
         ws.send(JSON.stringify(comando4));
-        document.getElementById("notificar").value = "";//Se limpia el buffer
+        var tiempoComando= new Date(milliseconds)+30000;
+        var contador=0;
+        while(contador<3){
+        if(TiempoComando==new Date(millisecons) && message.commando=='desactivar'){
+         document.getElementById("notificar").value = "";//Se limpia el buffer
+            contador=3 
+        }else{
+           document.getElementById("notificar").value = "wait";
+             ws.send(JSON.stringify(comando4));
+             tiempoComando= new Date(milliseconds)+30000;
+             contador++;
+          }
+        }
       }
 
       
@@ -153,7 +190,21 @@
         comando3.comando='buscar';
         comando3.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando3));
-        document.getElementById("buscar").value = "";//Se limpia el buffer
+        var tiempoComandoB= new Date(milliseconds)+30000;
+        var contadorB=0;
+        var contadorB=0;
+        while(contador<3){
+        if(TiempoComandoB==new Date(millisecons) && message.commando=='buscar' ){
+         document.getElementById("buscar").value = "";//Se limpia el buffer 
+         contadorB=3;
+        }else{
+           document.getElementById("buscar").value = "wait";
+             ws.send(JSON.stringify(comando3));
+             tiempoComandoB= new Date(milliseconds)+30000;
+             contadorN++;
+          }
+         }
+
       }
 
 
