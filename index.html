@@ -125,7 +125,7 @@
          comando1.comando='restaurar';
          comando1.user = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(comando1));
-         var tiempoComandoR= new Date(milliseconds)+30000;
+         var tiempoComandoR=new Date(milliseconds)+30000;
          var contadorR=0;
          while(contadorR<3){
         if(new Date(millisecons)<TiempoComandoR && message.commando=='restaurar' ){
@@ -134,7 +134,7 @@
         }else{
            document.getElementById("restaurar").value = "wait";
              ws.send(JSON.stringify(comando1));
-             tiempoComandoR= new Date(milliseconds)+30000;
+             tiempoComandoR=new Date(milliseconds)+30000;
              contadorR++;
           }
          }
@@ -147,7 +147,7 @@
         comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
-         var tiempoComandoN= new Date(milliseconds)+30000;
+         var tiempoComandoN=new Date(milliseconds)+30000;
          var contadorN=0;
          while(contadorN<3){
         if(new Date(millisecons)<TiempoComandoN && message.commando=='notificar0' ){
@@ -156,7 +156,7 @@
         }else{
            document.getElementById("notificar").value = "wait";
              ws.send(JSON.stringify(comando2));
-             tiempoComandoN= new Date(milliseconds)+30000;
+             tiempoComandoN=new Date(milliseconds)+30000;
              contadorN++;
           }
          }
@@ -168,7 +168,7 @@
         comando4.comando='desactivar';
         comando4.user = document.getElementById("desactivar").value;
         ws.send(JSON.stringify(comando4));
-        var tiempoComando= new Date(milliseconds)+30000;
+        var tiempoComando=new Date(milliseconds)+30000;
         var contador=0;
         while(contador<3){
         if(new Date(millisecons)<TiempoComando && message.commando=='desactivar'){
@@ -177,7 +177,7 @@
         }else{
            document.getElementById("notificar").value = "wait";
              ws.send(JSON.stringify(comando4));
-             tiempoComando= new Date(milliseconds)+30000;
+             tiempoComando=new Date(milliseconds)+30000;
              contador++;
           }
         }
@@ -190,8 +190,8 @@
         comando3.comando='buscar';
         comando3.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando3));
-        var tiempoComandoB= new Date(milliseconds);
-        tiempoComandoB+30000;
+        var tiempoComandoB=new Date();
+        tiempoComandoB.getTime()+30000;
         var contadorB=0;
         alert(tiempoComandoB + new Date(milliseconds));
         while(contadorB<3){
@@ -201,8 +201,8 @@
         }else{
            document.getElementById("buscar").value = "wait";
              ws.send(JSON.stringify(comando3));
-             tiempoComandoB= new Date(milliseconds);
-             tiempoComandoB+30000;
+             tiempoComandoB=new Date();
+             tiempoComandoB.getTime()+30000;
              contadorB++;
           }
          }
