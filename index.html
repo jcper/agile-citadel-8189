@@ -195,7 +195,10 @@
         var contadorB=0;
         alert(d);
         while(contadorB<3){
-        if(new Date().getTime()<d && message.commando=='buscar' ){
+          var timeout=new date();
+          var Timeout=timeout.getTime();
+
+        if(Timeout<d && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
