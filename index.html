@@ -202,6 +202,7 @@
         if(Timeout<d && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
+           alert('fuera'+contadorB);
         }else{
            document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando3));
