@@ -199,11 +199,12 @@
           var timeout=new Date();
           var Timeout=timeout.getTime();
           alert(Timeout);
-        if(Timeout<d && message.commando=='buscar' ){
+        if(Timeout<d ){
+          if(message.commando=='buscar'){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
            alert('fuera'+contadorB);
-        }else{
+            }else{
            document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando3));
              tiempoComandoB=new Date();
@@ -211,8 +212,10 @@
              alert('comando recibido');
              contadorB++;
           }
+         }else{
+             document.getElementById("buscar").value = 'timeout';
          }
-
+        }
       }
 
 
