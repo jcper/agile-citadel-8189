@@ -190,7 +190,8 @@
         comando3.comando='buscar';
         comando3.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando3));
-        var tiempoComandoB= new Date(milliseconds)+30000;
+        var tiempoComandoB= new Date(milliseconds);
+        tiempoComandoB+30000;
         var contadorB=0;
         alert(tiempoComandoB + new Date(milliseconds));
         while(contadorB<3){
@@ -200,7 +201,8 @@
         }else{
            document.getElementById("buscar").value = "wait";
              ws.send(JSON.stringify(comando3));
-             tiempoComandoB= new Date(milliseconds)+30000;
+             tiempoComandoB= new Date(milliseconds);
+             tiempoComandoB+30000;
              contadorB++;
           }
          }
