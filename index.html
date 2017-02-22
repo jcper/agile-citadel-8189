@@ -195,7 +195,7 @@
         var contadorB=0;
         alert(tiempoComandoB);
         while(contadorB<3){
-        if(new Date(millisecons)<TiempoComandoB && message.commando=='buscar' ){
+        if(new Date().getTime()<TiempoComandoB && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
