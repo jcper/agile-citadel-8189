@@ -25,7 +25,10 @@
       var creado=false;
       var miregistro=1;
       var nopintarN=false;
-        
+      var comandoRecRestaurar=false;
+      var comandoRecDesactivar=false;
+      var comandoRecBuscar=false; 
+      var comandoRecNotificar=false; 
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
@@ -42,6 +45,20 @@
        }; 
 
        if(message.comando==='notificar0' || message.comando==='buscar' || message.comando==='restaurar' | message.comando==='desactivar') {
+       if(message.comando==='notificar0'){
+           var comandoRecNotificar=true; 
+       };
+        if(message.comando==='buscar'){
+           var comandoRecBuscar=true; 
+       }
+
+        if(message.comando==='restaurar'){
+           var comandoRecRestaurar=true; 
+       }
+
+        if(message.comando==='desactivar'){
+           var comandoRecDesactivar=true; 
+       }
 
         var table2=document.getElementById('myTable2');
          if(indiceN==1){
@@ -69,6 +86,7 @@
         indiceN++;
        };
         nopintarN=true;//Esto booleano no escribe la notificacion en los equipos en curso.
+
      };
     
       //if (indice!==1){
@@ -116,6 +134,7 @@
         };
       };
         nopintarN=false;
+
       };
 
     
@@ -200,9 +219,10 @@
           var Timeout=timeout.getTime();
           alert(Timeout);
         if(Timeout<d ){
-          if(message.commando==='buscar'){
+          if(comandoRecBuscar){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
+           comandoRecBuscar=false;
            alert('fuera'+contadorB);
             }else{
            document.getElementById("buscar").value = 'wait';
@@ -214,6 +234,7 @@
           }
          }else{
              document.getElementById("buscar").value = 'timeout';
+              comandoRecBuscar=false;
          }
         }
       }
