@@ -191,11 +191,11 @@
         comando3.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando3));
         var tiempoComandoB=new Date();
-        tiempoComandoB.getTime()+30000;
+        var d=tiempoComandoB.getTime()+30000;
         var contadorB=0;
-        alert(tiempoComandoB);
+        alert(tiempoComandoB.getTime());
         while(contadorB<3){
-        if(new Date().getTime()<TiempoComandoB && message.commando=='buscar' ){
+        if(new Date().getTime()<d && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
