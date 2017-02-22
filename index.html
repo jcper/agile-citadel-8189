@@ -199,7 +199,7 @@
           var timeout=new Date();
           var Timeout=timeout.getTime();
           alert(Timeout);
-        if(Timeout>d && message.commando=='buscar' ){
+        if(Timeout<d && message.commando=='buscar' ){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
         }else{
