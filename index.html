@@ -187,20 +187,30 @@
         comando4.comando='desactivar';
         comando4.user = document.getElementById("desactivar").value;
         ws.send(JSON.stringify(comando4));
-        var tiempoComando=new Date(milliseconds)+30000;
+        var tiempoComando=new Date();
+        var d_desactivar=tiempoComando.getTime()+60000;
         var contador=0;
         while(contador<3){
-        if(new Date(millisecons)<TiempoComando && message.commando=='desactivar'){
-         document.getElementById("notificar").value = "";//Se limpia el buffer
-            contador=3 
-        }else{
-           document.getElementById("notificar").value = "wait";
-             ws.send(JSON.stringify(comando4));
-             tiempoComando=new Date(milliseconds)+30000;
-             contador++;
+          var timeoutD=new Date();
+          var TimeoutD=timeoutD.getTime();
+          if(TimeoutD<d_desactivar){
+          if(comandoRecBuscar){
+         document.getElementById("desactivar").value = "";//Se limpia el buffer 
+         contador=3;
+           comandoRecDesactivar=false;
+            }else{
+           document.getElementById("desactivar").value = 'wait';
+             ws.send(JSON.stringify(comando3));
+           contador++;
           }
+         }else{
+             document.getElementById("desactivar").value = 'timeout';
+              comandoRecBuscar=false;
+         }
         }
-      }
+         document.getElementById("desactivar").value = "";
+          comandoRecBuscar=false;
+    }
 
       
 
@@ -212,24 +222,17 @@
         var tiempoComandoB=new Date();
         var d=tiempoComandoB.getTime()+60000;
         var contadorB=0;
-        alert(d);
-        alert(contadorB);
          while(contadorB<3){
           var timeout=new Date();
           var Timeout=timeout.getTime();
-          alert(Timeout);
         if(Timeout<d ){
           if(comandoRecBuscar){
          document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorB=3;
            comandoRecBuscar=false;
-           alert('fuera'+contadorB);
             }else{
            document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando3));
-             tiempoComandoB=new Date();
-             tiempoComandoB.getTime()+30000;
-             alert('comando recibido');
              contadorB++;
           }
          }else{
