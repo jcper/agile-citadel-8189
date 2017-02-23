@@ -205,7 +205,7 @@
        function sendMessageDesactivacion() {
         var comando4={};
         comando4.comando='desactivar';
-        comando4.user = document.getElementById("desactivar").value;
+        comando4.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando4));
         var tiempoComando=new Date();
         var d_desactivar=tiempoComando.getTime()+60000;
@@ -215,20 +215,20 @@
           var TimeoutD=timeoutD.getTime();
           if(TimeoutD<d_desactivar){
           if(comandoRecDesactivar){
-         document.getElementById("desactivar").value = "";//Se limpia el buffer 
+         document.getElementById("notificar").value = "";//Se limpia el buffer 
          contador=3;
            comandoRecDesactivar=false;
             }else{
-           document.getElementById("desactivar").value = 'wait';
+           document.getElementById("notificar").value = 'wait';
              ws.send(JSON.stringify(comando4));
            contador++;
           }
          }else{
-             document.getElementById("desactivar").value = 'timeout';
+             document.getElementById("notificar").value = 'timeout';
               comandoRecDesactivar=false;
          }
         }
-         document.getElementById("desactivar").value = "";
+         document.getElementById("notificar").value = "";
           comandoRecDesactivar=false;
         }
 
