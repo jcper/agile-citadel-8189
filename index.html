@@ -144,20 +144,30 @@
          comando1.comando='restaurar';
          comando1.user = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(comando1));
-         var tiempoComandoR=new Date(milliseconds)+30000;
+         var tiempoComandoR=new Date(milliseconds);
+         var d_restaurar=tiempoComandoR.getTime()+60000;
          var contadorR=0;
          while(contadorR<3){
-        if(new Date(millisecons)<TiempoComandoR && message.commando=='restaurar' ){
+          var timeoutR=new Date();
+          var TimeoutR=timeoutR.getTime();
+          if(TimeoutR<d_restaurar){
+          if(comandoRecRestaurar){
          document.getElementById("restaurar").value = "";//Se limpia el buffer 
-          contador=3;
-        }else{
-           document.getElementById("restaurar").value = "wait";
-             ws.send(JSON.stringify(comando1));
-             tiempoComandoR=new Date(milliseconds)+30000;
-             contadorR++;
+         contador=3;
+           comandoRecRestaurar=false;
+            }else{
+           document.getElementById("restaurar").value = 'wait';
+             ws.send(JSON.stringify(comando2));
+           contador++;
           }
+         }else{
+             document.getElementById("restaurar").value = 'timeout';
+              comandoRecRestaurar=false;
          }
-      }
+        }
+         document.getElementById("restaurar").value = "";
+          comandoRecRestaurar=false;
+        }
 
       
     
@@ -166,21 +176,31 @@
         comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
-         var tiempoComandoN=new Date(milliseconds)+30000;
+         var tiempoComandoN=new Date(milliseconds);
+         var d_notificar=tiempoComando.getTime()+60000;
          var contadorN=0;
          while(contadorN<3){
-        if(new Date(millisecons)<TiempoComandoN && message.commando=='notificar0' ){
-         document.getElementById("notificar").value = "";//Se limpia el buffer
-           contadorN=3; 
-        }else{
-           document.getElementById("notificar").value = "wait";
+          var timeoutN=new Date();
+          var TimeoutN=timeoutN.getTime();
+          if(TimeoutN<d_notificar){
+          if(comandoRecNotificar){
+         document.getElementById("notificar").value = "";//Se limpia el buffer 
+         contador=3;
+           comandoRecNotificar=false;
+            }else{
+           document.getElementById("notificar").value = 'wait';
              ws.send(JSON.stringify(comando2));
-             tiempoComandoN=new Date(milliseconds)+30000;
-             contadorN++;
+           contador++;
           }
+         }else{
+             document.getElementById("notificar").value = 'timeout';
+              comandoRecNotificar=false;
          }
-        
+        }
+         document.getElementById("notificar").value = "";
+          comandoRecNotificar=false;
       }
+
 
        function sendMessageDesactivacion() {
         var comando4={};
@@ -194,23 +214,23 @@
           var timeoutD=new Date();
           var TimeoutD=timeoutD.getTime();
           if(TimeoutD<d_desactivar){
-          if(comandoRecBuscar){
+          if(comandoRecDesactivar){
          document.getElementById("desactivar").value = "";//Se limpia el buffer 
          contador=3;
            comandoRecDesactivar=false;
             }else{
            document.getElementById("desactivar").value = 'wait';
-             ws.send(JSON.stringify(comando3));
+             ws.send(JSON.stringify(comando4));
            contador++;
           }
          }else{
              document.getElementById("desactivar").value = 'timeout';
-              comandoRecBuscar=false;
+              comandoRecDesactivar=false;
          }
         }
          document.getElementById("desactivar").value = "";
-          comandoRecBuscar=false;
-    }
+          comandoRecDesactivar=false;
+        }
 
       
 
