@@ -144,7 +144,7 @@
          comando1.comando='restaurar';
          comando1.user = document.getElementById("restaurar").value;
         ws.send(JSON.stringify(comando1));
-         var tiempoComandoR=new Date(milliseconds);
+         var tiempoComandoR=new Date();
          var d_restaurar=tiempoComandoR.getTime()+60000;
          var contadorR=0;
          while(contadorR<3){
@@ -176,8 +176,8 @@
         comando2.comando='notificar';
         comando2.user = document.getElementById("notificar").value;
         ws.send(JSON.stringify(comando2));
-         var tiempoComandoN=new Date(milliseconds);
-         var d_notificar=tiempoComando.getTime()+60000;
+         var tiempoComandoN=new Date();
+         var d_notificar=tiempoComandoN.getTime()+60000;
          var contadorN=0;
          while(contadorN<3){
           var timeoutN=new Date();
