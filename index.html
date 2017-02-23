@@ -153,12 +153,12 @@
           if(TimeoutR<d_restaurar){
           if(comandoRecRestaurar){
          document.getElementById("restaurar").value = "";//Se limpia el buffer 
-         contador=3;
+         contadorR=3;
            comandoRecRestaurar=false;
             }else{
            document.getElementById("restaurar").value = 'wait';
              ws.send(JSON.stringify(comando2));
-           contador++;
+           contadorR++;
           }
          }else{
              document.getElementById("restaurar").value = 'timeout';
@@ -185,12 +185,12 @@
           if(TimeoutN<d_notificar){
           if(comandoRecNotificar){
          document.getElementById("notificar").value = "";//Se limpia el buffer 
-         contador=3;
+         contadorN=3;
            comandoRecNotificar=false;
             }else{
            document.getElementById("notificar").value = 'wait';
              ws.send(JSON.stringify(comando2));
-           contador++;
+           contadorN++;
           }
          }else{
              document.getElementById("notificar").value = 'timeout';
