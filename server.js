@@ -3,6 +3,7 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
+var fs = require('fs');
 var alarma;
 var Fecha=new Date().toTimeString();
 
@@ -21,9 +22,38 @@ wss.on('connection', function(ws) {
     ws.on('message', function(message) {
         console.log('received: %s', message);
         alarma=message;
+       if(alarma.conexion!==undefined){
+         var dia=new Date();
+        data='-Usuario: '+alarma.name+'-Conexion'+alarma.conexion+'-Date'+d.toUTCString()+'-Ubicacion'+alarma.ip+'/n ';
+        fs.appendFile('serverlog.txt',data, function(err) {
+       if( err ){
+        console.log( err );
+          });
+        }
       });
-        
-    ws.on('close',() =>console.log('client disconected'));
+
+       if(alarma.alarma!==undefined){
+         var dia=new Date();
+        data='-Usuario: '+alarma.name+'-Alarma'+alarma.alarma+'-Date'+d.toUTCString()+'-Ubicacion'+alarma.ip+'/n ';
+        fs.appendFile('serverlog.txt',data, function(err) {
+       if( err ){
+        console.log( err );
+          });
+        }
+      });
+      
+        if(alarma.ErrorEthernet!==undefined){
+         var dia=new Date();
+        data='-Usuario: '+alarma.name+'-Alarma'+alarma.ErrorEthernet+'-Date'+d.toUTCString()+'-Ubicacion'+alarma.ip+'/n ';
+        fs.appendFile('serverlog.txt',data, function(err) {
+       if( err ){
+        console.log( err );
+          });
+        }
+      });
+
+    
+   ws.on('close',() =>console.log('client disconected'));
 });
 
 
