@@ -43,6 +43,20 @@
             alarma:message.alarma
         };
        }; 
+       
+       //Devuelve inicioConexion al cliente.
+        if(message.conexion>=0 && message.user!=undefined){
+           var usuario=message.user;
+           var contador_cliente=message.conexion;
+           var conexion={};
+         conexion.comando='conectado';
+         conexion.user = usuario;
+         conexion.contador=contador_cliente;
+        ws.send(JSON.stringify(conexion));
+
+        }
+
+
 
        if(message.comando==='notificar0' || message.comando==='buscar' || message.comando==='restaurar' || message.comando==='desactivar') {
        if(message.comando==='notificar0'){
@@ -338,6 +352,16 @@
       <tr>
         <td>Alarma 4</td>
         <td>Servicio Agora</td>
+        <td>Alarma 0</td>
+      </tr>
+       <tr>
+        <td>Alarma 5</td>
+        <td>Desconexion electrica</td>
+        <td>Alarma 0</td>
+      </tr>
+      <tr>
+        <td>Alarma 6</td>
+        <td>Desconexion ethernet</td>
         <td>Alarma 0</td>
       </tr>
     </tbody>
