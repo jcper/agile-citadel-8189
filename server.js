@@ -28,9 +28,9 @@ wss.on('connection', function(ws) {
         fs.appendFile('serverlog.txt',data, function(err) {
        if( err ){
         console.log( err );
-          });
-        }
-      });
+          };
+         });
+       }
 
        if(alarma.alarma!==undefined){
          var dia=new Date();
@@ -38,18 +38,19 @@ wss.on('connection', function(ws) {
         fs.appendFile('serverlog.txt',data, function(err) {
        if( err ){
         console.log( err );
-          });
-        }
-      });
+          };
+        });
       
+      }
         if(alarma.ErrorEthernet!==undefined){
          var dia=new Date();
         data='-Usuario: '+alarma.name+'-Alarma'+alarma.ErrorEthernet+'-Date'+d.toUTCString()+'-Ubicacion'+alarma.ip+'/n ';
         fs.appendFile('serverlog.txt',data, function(err) {
        if( err ){
         console.log( err );
-          });
-        }
+          };
+        });
+       }
       });
 
     
