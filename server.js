@@ -24,7 +24,7 @@ wss.on('connection', function(ws) {
 
     ws.on('message', function(message) {
         dia=new Date();
-        FinalizaTiempo=dia + TiempoEspera
+        FinalizaTiempo=dia + TiempoEspera;
         alarma=message;
        if(alarma.conexion!==undefined){
         dataconexion='-Usuario: '+alarma.name+'-Conexion'+alarma.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+alarma.ip;
@@ -39,7 +39,7 @@ wss.on('connection', function(ws) {
 
       
         if(alarma.ErrorEthernet!==undefined){
-         var dia=new Date();
+        
         dataerrorethernet='-Usuario: '+alarma.name+'-Alarma:ErrorEthernet'+alarma.ErrorEthernet+'-Date'+dia.toUTCString()+'-Ubicacion'+alarma.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
        }
