@@ -7,6 +7,7 @@ var fs = require('fs');
 var alarma;
 var TiempoEspera=600000;
 var FinalizaTiempo;
+var InicioEscritura=50000;
 var dia;
 var Fecha=new Date().toTimeString();
 var AlarmaUno=false;
@@ -33,11 +34,13 @@ wss.on('connection', function(ws) {
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(message.alarma!==0 && dia>=FinalizaTiempo || !AlarmaUno){
+        if(message.alarma!==0 && dia>=FinalizaTiempo ){
         var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
-        FinalizaTiempo=0;
-        AlarmaUno=true; 
+        var TerminarEscritura=dia+InicioEscritura;
+        if(dia>=TerminarEscritura){
+           FinalizaTiempo=0;
+         }
        }
 
       
