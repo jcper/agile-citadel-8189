@@ -35,7 +35,7 @@ wss.on('connection', function(ws) {
 
         if(message.alarma!==undefined && dia>=FinalizaTiempo || !AlarmaUno){
         var dataalarma='-Usuario: '+mensaje.name+'-Conexion'+mensaje.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+mensaje.ip;
-        console.log('[alarma]: %s', datalarma);
+        console.log('[alarma]: %s', dataalarma);
         FinalizaTiempo=0;
         AlarmaUno=true; 
        }
