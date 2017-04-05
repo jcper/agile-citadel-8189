@@ -9,6 +9,7 @@ var TiempoEspera=600000;
 var FinalizaTiempo;
 var dia;
 var Fecha=new Date().toTimeString();
+var AlarmaUno=false;
 var mensaje;
 const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
@@ -32,10 +33,11 @@ wss.on('connection', function(ws) {
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(message.alarma!==undefined && dia>=FinalizaTiempo){
+        if(message.alarma!==undefined && dia>=FinalizaTiempo || !AlarmaUno){
         var dataalarma='-Usuario: '+mensaje.name+'-Conexion'+mensaje.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+mensaje.ip;
         console.log('[alarma]: %s', datalarma);
-        FinalizaTiempo=0; 
+        FinalizaTiempo=0;
+        AlarmaUno=true; 
        }
 
       
