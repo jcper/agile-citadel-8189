@@ -29,12 +29,12 @@ wss.on('connection', function(ws) {
         alarma=message;
         mensaje=JSON.parse(message);
        if(mensaje.conexion>=0){
-        var dataconexion='---Usuario: '+mensaje.name+'---Conexion'+mensaje.conexion+'---Date'+dia.toUTCString()+'---Ubicacion'+mensaje.ip;
+        var dataconexion='---Usuario: '+mensaje.name+'---Conexion: '+mensaje.conexion+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(message.alarma!=='0' && dia>=FinalizaTiempo || !AlarmaUno){
-        var dataalarma='---Usuario: '+mensaje.name+'---Alarma'+mensaje.alarma+'---Date'+dia.toUTCString()+'---Ubicacion'+mensaje.ip;
+        if(message.alarma!==0 && dia>=FinalizaTiempo || !AlarmaUno){
+        var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
         FinalizaTiempo=0;
         AlarmaUno=true; 
@@ -43,7 +43,7 @@ wss.on('connection', function(ws) {
       
         if(message.ErrorEthernet>=0){
         
-        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet'+mensaje.ErrorEthernet+'---Date'+dia.toUTCString()+'---Ubicacion'+mensaje.ip;
+        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
        }
       });
