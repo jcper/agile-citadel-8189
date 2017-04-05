@@ -26,19 +26,19 @@ wss.on('connection', function(ws) {
         dia=new Date();
         FinalizaTiempo=dia + TiempoEspera;
         alarma=message;
-       if(alarma.conexion!==undefined){
+       if(alarma.conexion!=undefined){
         dataconexion='-Usuario: '+alarma.name+'-Conexion'+alarma.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+alarma.ip;
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(alarma.alarma!==undefined && dia >=FinalizaTiempo){
+        if(alarma.alarma!=undefined && dia>=FinalizaTiempo){
         dataalarma='-Usuario: '+alarma.name+'-Conexion'+alarma.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+alarma.ip;
         console.log('[alarma]: %s', datalarma);
         FinalizaTiempo=0; 
        }
 
       
-        if(alarma.ErrorEthernet!==undefined){
+        if(alarma.ErrorEthernet!=undefined){
         
         dataerrorethernet='-Usuario: '+alarma.name+'-Alarma:ErrorEthernet'+alarma.ErrorEthernet+'-Date'+dia.toUTCString()+'-Ubicacion'+alarma.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
