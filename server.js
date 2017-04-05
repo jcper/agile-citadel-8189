@@ -9,7 +9,7 @@ var TiempoEspera=600000;
 var FinalizaTiempo;
 var dia;
 var Fecha=new Date().toTimeString();
-
+var mensaje;
 const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
 
@@ -26,6 +26,7 @@ wss.on('connection', function(ws) {
         dia=new Date();
         FinalizaTiempo=dia + TiempoEspera;
         alarma=message;
+        mensaje=JSON.parse(message.data);
        if(message.conexion>=0){
         dataconexion='-Usuario: '+message.name+'-Conexion'+message.conexion+'-Date'+dia.toUTCString()+'-Ubicacion'+message.ip;
         console.log('[conexion]: %s', dataconexion);
