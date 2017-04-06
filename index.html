@@ -28,7 +28,9 @@
       var comandoRecRestaurar=false;
       var comandoRecDesactivar=false;
       var comandoRecBuscar=false; 
-      var comandoRecNotificar=false; 
+      var comandoRecNotificar=false;
+      var desconexiones_Elec=0;
+      var desconexiones_Ethernet=0; 
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
@@ -46,15 +48,29 @@
        
        //Devuelve inicioConexion al cliente.
         if(message.conexion>=0 && message.user!=undefined){
+           desconexiones_Elec++;
            var usuario=message.user;
-           var contador_cliente=message.conexion;
+           var contador_cliente=desconexiones_Elec;
            var conexion={};
          conexion.comando='conectado';
          conexion.user = usuario;
          conexion.contador=contador_cliente;
         ws.send(JSON.stringify(conexion));
-
+         
         }
+
+         if(message.ErrorEthernet>=0 && message.user!=undefined){
+           desconexiones_Ethernet++;
+           var usuario=message.user;
+           var contador_cliente=desconexiones_Ethernet;
+           var ErrorEthernet={};
+         ErrorEthernet.comando='ErrorEthernet';
+         ErrorEthernet.user = usuario;
+         ErrorEthernet.contador=contador_cliente;
+        ws.send(JSON.stringify(ErrorEthernet));
+         
+        }
+
 
 
 
