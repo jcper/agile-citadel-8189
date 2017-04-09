@@ -32,7 +32,7 @@ wss.on('connection', function(ws) {
         console.log('[cliente conectado]: %s', mensaje.name);
         console.log('[mensaje recibidos cliente ]: %s', message);
        if(mensaje.conexion>=0){
-        var dataconexion='---Usuario: '+mensaje.name+'---Conexion: '+mensaje.conexion+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
+        var dataconexion='---Usuario: '+mensaje.name+'---Conexion: '+mensaje.conexion+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
         console.log('[conexion]: %s', dataconexion);
        }
 
@@ -48,7 +48,7 @@ wss.on('connection', function(ws) {
       
         if(message.ErrorEthernet>=0){
         
-        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
+        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
        }
       });
