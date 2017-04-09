@@ -52,7 +52,7 @@
         if(message.conexion>=0){
            alert('he llegadO AQUI');
            for (var i=0; i<usuarios.length; i++){
-             if(message.name===usuario[i].name){
+             if(message.name===usuarios[i].name){
                usuario[i].desconexiones++;
                alert('desconexiones' + usuario[i].desconexiones++);
                var usuariod=message.user;
@@ -67,7 +67,7 @@
 
          if(message.ErrorEthernet>=0){
           for (var i=0; i<usuarios.length; i++){
-            if(message.name===usuario[i].name){
+            if(message.name===usuarios[i].name){
               usuario[i].ethernet++;
              alert('desconexiones' + usuario[i].desconexiones++);
            var usuarioE=message.user;
