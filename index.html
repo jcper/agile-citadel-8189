@@ -68,7 +68,7 @@
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuario[i].name){
               usuario[i].ethernet++;
-              console.log('ErrorEthernet: ' + desconexiones_Ethernet);
+             alert('desconexiones' + usuario[i].desconexiones++);
            var usuarioE=message.user;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
@@ -76,8 +76,9 @@
          ErrorEthernet.contador= usuario.ethernet;
          ws.send(JSON.stringify(ErrorEthernet)); 
           }
-       }
-
+        }
+      }
+       
 
 
 
