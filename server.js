@@ -29,7 +29,8 @@ wss.on('connection', function(ws) {
         FinalizaTiempo=dia + TiempoEspera;
         alarma=message;
         mensaje=JSON.parse(message);
-        console.log('[cliente conectado]: %s', message.name);
+        console.log('[cliente conectado]: %s', mensaje.name);
+        console.log('[mensaje recibidos cliente ]: %s', message);
        if(mensaje.conexion>=0){
         var dataconexion='---Usuario: '+mensaje.name+'---Conexion: '+mensaje.conexion+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
         console.log('[conexion]: %s', dataconexion);
