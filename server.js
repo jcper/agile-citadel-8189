@@ -36,17 +36,17 @@ wss.on('connection', function(ws) {
         console.log('[conexion]: %s', dataconexion);
        }
 
-        //if(message.alarma!==0 && dia>=FinalizaTiempo ){
-        //var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toUTCString()+'---Ubicacion: '+mensaje.ip;
-        //console.log('[alarma]: %s', dataalarma);
-        //var TerminarEscritura=dia+InicioEscritura;
-        //if(dia>=TerminarEscritura){
-        //   FinalizaTiempo=0;
-        // }
-      // }
+        if(mensaje.alarma>0 && dia>=FinalizaTiempo ){
+        var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
+        console.log('[alarma]: %s', dataalarma);
+        var TerminarEscritura=dia+InicioEscritura;
+        if(dia>=TerminarEscritura){
+           FinalizaTiempo=0;
+         }
+       }
 
       
-        if(message.ErrorEthernet>=0){
+        if(mensaje.ErrorEthernet>=0){
         
         var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
