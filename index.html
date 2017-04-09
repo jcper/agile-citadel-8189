@@ -29,8 +29,8 @@
       var comandoRecDesactivar=false;
       var comandoRecBuscar=false; 
       var comandoRecNotificar=false;
-      var desconexiones_elec;
-      var Ethernet;
+      var desconexiones_elec=0;
+      var Ethernet=0;
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
@@ -50,6 +50,7 @@
        
        //Devuelve inicioConexion al cliente.
         if(message.conexion!==undefined){
+           alert('he llegadO AQUI');
            for (var i=0; i<usuarios.length; i++){
              if(message.name===usuario[i].name){
                usuario[i].desconexiones++;
