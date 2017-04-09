@@ -29,8 +29,6 @@
       var comandoRecDesactivar=false;
       var comandoRecBuscar=false; 
       var comandoRecNotificar=false;
-      var desconexiones_Elec=0;
-      var desconexiones_Ethernet=0; 
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
@@ -42,35 +40,41 @@
         var  usuario={
             name: message.name,
             registro: indice,
-            alarma:message.alarma
-        };
+            alarma:message.alarma,
+            desconexiones:0,
+            ethernet:0
+         };
        }; 
        
        //Devuelve inicioConexion al cliente.
-        if(message.conexion>=0 && message.user!=undefined){
-           desconexiones_Elec++;
-           console.log('desconexiones_Elec: ' +desconexiones_Elec++);
-           var usuariod=message.user;
-           desconexiones_Elec;
-           var conexion={};
-         conexion.comando='conectado';
-         conexion.user = usuariod;
-         conexion.contador=desconexiones_Elec;
-        ws.send(JSON.stringify(conexion));
-         
-        }
+        if(message.conexion>=0){
+           for (var i=0; i<usuarios.length; i++){
+             if(message.name===usuario[i].name){
+               usuario[i].desconexiones++;
+               alert('desconexiones' + usuario[i].desconexiones++);
+               var usuariod=message.user;
+               var conexion={};
+               conexion.comando='conectado';
+               conexion.user = usuariod;
+               conexion.contador=usuario.desconexiones;
+              ws.send(JSON.stringify(conexion));
+             }
+           }
+         }
 
-         if(message.ErrorEthernet>=0 && message.user!=undefined){
-           desconexiones_Ethernet++;
-           console.log('ErrorEthernet: ' + desconexiones_Ethernet);
+         if(message.ErrorEthernet>=0){
+          for (var i=0; i<usuarios.length; i++){
+            if(message.name===usuario[i].name){
+              usuario[i].ethernet++;
+              console.log('ErrorEthernet: ' + desconexiones_Ethernet);
            var usuarioE=message.user;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
          ErrorEthernet.user = usuarioE;
-         ErrorEthernet.contador= desconexiones_Ethernet;
-        ws.send(JSON.stringify(ErrorEthernet));
-         
-        }
+         ErrorEthernet.contador= usuario.ethernet;
+         ws.send(JSON.stringify(ErrorEthernet)); 
+          }
+       }
 
 
 
@@ -328,7 +332,7 @@
       <tr>
         <th>Equipo</th>
         <th>Alarmas</th>
-        <th>Fecha</th>
+        <th>Inicio Conexion</th>
         <th>Ubicacion</th>
       </tr>
     </thead>
