@@ -49,24 +49,25 @@
        //Devuelve inicioConexion al cliente.
         if(message.conexion>=0 && message.user!=undefined){
            desconexiones_Elec++;
-           var usuario=message.user;
-           var contador_cliente=desconexiones_Elec;
+           console.log('desconexiones_Elec: ' +desconexiones_Elec++);
+           var usuariod=message.user;
+           desconexiones_Elec;
            var conexion={};
          conexion.comando='conectado';
-         conexion.user = usuario;
-         conexion.contador=contador_cliente;
+         conexion.user = usuariod;
+         conexion.contador=desconexiones_Elec;
         ws.send(JSON.stringify(conexion));
          
         }
 
          if(message.ErrorEthernet>=0 && message.user!=undefined){
            desconexiones_Ethernet++;
-           var usuario=message.user;
-           var contador_cliente=desconexiones_Ethernet;
+           console.log('desconexiones_Elec: ' +desconexiones_Elec++);
+           var usuarioE=message.user;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
-         ErrorEthernet.user = usuario;
-         ErrorEthernet.contador=contador_cliente;
+         ErrorEthernet.user = usuarioE;
+         ErrorEthernet.contador= desconexiones_Ethernet;
         ws.send(JSON.stringify(ErrorEthernet));
          
         }
