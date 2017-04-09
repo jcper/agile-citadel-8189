@@ -35,7 +35,7 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
-        if(message.name!==undefined || message.alarma!==undefined){
+        if(message.name!==undefined || message.alarma!==undefined ){
 
         //alert(message.alarma);
         if(message.alarma!=='undefined'){//esto para no crear usuario de la notificacion
@@ -49,7 +49,7 @@
        }; 
        
        //Devuelve inicioConexion al cliente.
-        if(message.conexion>=0){
+        if(message.conexion!==undefined){
            for (var i=0; i<usuarios.length; i++){
              if(message.name===usuario[i].name){
                usuario[i].desconexiones++;
