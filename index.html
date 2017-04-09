@@ -29,6 +29,8 @@
       var comandoRecDesactivar=false;
       var comandoRecBuscar=false; 
       var comandoRecNotificar=false;
+      var desconexiones_elec;
+      var Ethernet;
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
@@ -41,8 +43,8 @@
             name: message.name,
             registro: indice,
             alarma:message.alarma,
-            desconexiones:0,
-            ethernet:0
+            desconexiones:desconexiones_elec,
+            ethernet:Ethernet
          };
        }; 
        
