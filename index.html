@@ -53,13 +53,13 @@
            alert('he llegadO AQUI');
            for (var i=0; i<usuarios.length; i++){
              if(message.name===usuarios[i].name){
-               usuario[i].desconexiones++;
-               alert('desconexiones' + usuario[i].desconexiones++);
+               usuarios[i].desconexiones++;
+               alert('desconexiones' + usuarios[i].desconexiones++);
                var usuariod=message.user;
                var conexion={};
                conexion.comando='conectado';
                conexion.user = usuariod;
-               conexion.contador=usuario.desconexiones;
+               conexion.contador=usuarios[i].desconexiones;
               ws.send(JSON.stringify(conexion));
              }
            }
@@ -68,13 +68,13 @@
          if(message.ErrorEthernet>=0){
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuarios[i].name){
-              usuario[i].ethernet++;
-             alert('desconexiones' + usuario[i].desconexiones++);
+              usuarios[i].ethernet++;
+             alert('desconexiones' + usuarios[i].desconexiones++);
            var usuarioE=message.user;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
          ErrorEthernet.user = usuarioE;
-         ErrorEthernet.contador= usuario.ethernet;
+         ErrorEthernet.contador= usuarios[i].ethernet;
          ws.send(JSON.stringify(ErrorEthernet)); 
           }
         }
