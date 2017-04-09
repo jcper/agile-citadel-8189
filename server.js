@@ -36,13 +36,9 @@ wss.on('connection', function(ws) {
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(mensaje.alarma>0 && dia>=FinalizaTiempo ){
+        if(mensaje.alarma>0 ){
         var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
-        var TerminarEscritura=dia+InicioEscritura;
-        if(dia>=TerminarEscritura){
-           FinalizaTiempo=0;
-         }
        }
 
       
