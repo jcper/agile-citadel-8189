@@ -62,7 +62,7 @@
 
          if(message.ErrorEthernet>=0 && message.user!=undefined){
            desconexiones_Ethernet++;
-           console.log('desconexiones_Elec: ' +desconexiones_Elec++);
+           console.log('ErrorEthernet: ' + desconexiones_Ethernet);
            var usuarioE=message.user;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
