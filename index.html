@@ -49,7 +49,7 @@
        }; 
        
        //Devuelve inicioConexion al cliente.
-        if(message.conexion!==undefined){
+        if(message.conexion>=0){
            alert('he llegadO AQUI');
            for (var i=0; i<usuarios.length; i++){
              if(message.name===usuario[i].name){
