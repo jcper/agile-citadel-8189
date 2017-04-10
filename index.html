@@ -29,12 +29,13 @@
       var comandoRecDesactivar=false;
       var comandoRecBuscar=false; 
       var comandoRecNotificar=false;
-      var desconexiones_elec=1;
+      var desconexiones_elec=0;
       var Ethernet=0;
       ws.onmessage = function (event) {
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
+        alert('prueba2'+ message.conexion);
         if(message.name!==undefined || message.alarmasC[0]!==undefined ){
 
         //alert(message.alarma);
@@ -47,7 +48,7 @@
             ethernet:Ethernet
          };
        }; 
-       
+       alert('prueba1'+ message.conexion);
        //Devuelve inicioConexion al cliente.
         if(message.conexion>=0){
           alert('prueba1'+ message.conexion);
