@@ -133,7 +133,7 @@
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
              var alarmaAct= message.alarmasC;
-          if(message.name===usuarioAct.name && alarmaAct[0]===usuarioAct.alarma[0]){
+          if(message.name===usuarioAct.name && alarmaAct===usuarioAct.alarma){
              creado=true;
              miregistro=usuarioAct.registro;
             
