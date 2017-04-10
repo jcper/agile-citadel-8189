@@ -35,14 +35,14 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
-        if(message.name!==undefined || message.alarma!==undefined ){
+        if(message.name!==undefined || message.alarmasC[0]!==undefined ){
 
         //alert(message.alarma);
-        if(message.alarma!=='undefined'){//esto para no crear usuario de la notificacion
+        if(message.alarmasC[0]!=='undefined'){//esto para no crear usuario de la notificacion
         var  usuario={
             name: message.name,
             registro: indice,
-            alarma:message.alarma,
+            alarma:message.alarmasC[0],
             desconexiones:desconexiones_elec,
             ethernet:Ethernet
          };
@@ -130,7 +130,7 @@
       //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
-          if(message.name===usuarioAct.name && message.alarma===usuarioAct.alarma){
+          if(message.name===usuarioAct.name && message.alarmasC[0]===usuarioAct.alarma){
              creado=true;
              miregistro=usuarioAct.registro;
             
@@ -147,7 +147,7 @@
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         cell1.innerHTML = message.name;
-        cell2.innerHTML = message.alarma;
+        cell2.innerHTML = message.alarmasC[0]+','+message.alarmasC[1]+','+message.alarmasC[2];
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         creado=false;
@@ -163,7 +163,7 @@
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         cell1.innerHTML = message.name;
-        cell2.innerHTML = message.alarma;
+        cell2.innerHTML = message.alarmasC[0]+','+message.alarmasC[1]+','+message.alarmasC[2];
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceTB++;
