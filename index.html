@@ -35,11 +35,10 @@
    
       var table = document.getElementById('myTable');
         var message = JSON.parse(event.data);
-        alert('prueba2'+ message.conexion);
-        if(message.name!==undefined || message.alarmasC[0]!==undefined ){
+        if(message.name!==undefined || message.alarmasC!==undefined ){
 
-        //alert(message.alarma);
-        if(message.alarmasC[0]!==undefined){//esto para no crear usuario de la notificacion
+      
+        if(message.alarmasC!==undefined){//esto para no crear usuario de la notificacion
         var  usuario={
             name: message.name,
             registro: indice,
@@ -48,7 +47,7 @@
             ethernet:Ethernet
          };
        }; 
-       alert('prueba1'+ message.conexion);
+       
        //Devuelve inicioConexion al cliente.
         if(message.conexion>=0){
           alert('prueba1'+ message.conexion);
