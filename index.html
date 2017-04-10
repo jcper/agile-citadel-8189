@@ -42,7 +42,7 @@
         var  usuario={
             name: message.name,
             registro: indice,
-            alarma:message.alarmasC[0],
+            alarma:message.alarmasC,
             desconexiones:desconexiones_elec,
             ethernet:Ethernet
          };
@@ -133,7 +133,7 @@
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
              var alarmaAct= message.alarmasC;
-          if(message.name===usuarioAct.name && alarmaAct[0]===usuarioAct.alarma){
+          if(message.name===usuarioAct.name && alarmaAct[0]===usuarioAct.alarma[0]){
              creado=true;
              miregistro=usuarioAct.registro;
             
