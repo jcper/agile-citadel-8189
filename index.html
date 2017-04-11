@@ -72,7 +72,7 @@
             if(message.name===usuarios[i].name){
                var dateActual=new Date().getTime();
               if(dateActual-usuarios[i].dateConexion<=120000){
-               usuarios[i].date=dateActual;
+               usuarios[i].dateConexion=dateActual;
               }else{
               usuarios[i].ethernet++;
             var usuarioE=usuarios[i].name;
