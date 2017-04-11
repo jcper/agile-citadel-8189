@@ -75,13 +75,13 @@
                usuarios[i].date=dateActual;
               }else{
               usuarios[i].ethernet++;
-              usuarios[i].dateConexion=dateActual;
-             var usuarioE=usuarios[i].name;
+            var usuarioE=usuarios[i].name;
             var ErrorEthernet={};
             ErrorEthernet.comando='ErrorEthernet';
             ErrorEthernet.user = usuarioE;
            ErrorEthernet.contador= usuarios[i].ethernet;
             ws.send(JSON.stringify(ErrorEthernet)); 
+            usuarios[i].dateConexion=dateActual;
               }
              
           
