@@ -39,13 +39,14 @@
 
       
         if(message.alarmasC!==undefined){//esto para no crear usuario de la notificacion
+          var dateconexion=new date().getTime();
         var  usuario={
             name: message.name,
             registro: indice,
             alarma:message.alarmasC,
             desconexiones:desconexiones_elec,
             ethernet:Ethernet,
-            dateConexion:new date().getTime()
+            dateConexion:dateconexion
          };
        }; 
        
