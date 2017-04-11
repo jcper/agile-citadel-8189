@@ -36,7 +36,7 @@ wss.on('connection', function(ws) {
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(mensaje.alarmasC!==0){
+        if(mensaje.alarmasC>0){
         var dataalarma=' ---Usuario: ' +mensaje.name+' ---Alarma: '+mensaje.alarmasC+' ---Date: '+dia.toString()+' ---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
        }
