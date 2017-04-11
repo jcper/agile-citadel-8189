@@ -71,7 +71,7 @@
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuarios[i].name){
                var dateActual=new Date().getTime();
-              if(dateActual-usuario[i].date<=180000){
+              if(dateActual-usuario[i].dateConexion<=180000){
                usuarios[i].date=dateActual;
               }else{
               usuarios[i].ethernet++;
