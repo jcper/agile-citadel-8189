@@ -31,13 +31,14 @@ wss.on('connection', function(ws) {
         mensaje=JSON.parse(message);
         console.log('[cliente conectado]: %s', mensaje.name);
         console.log('[mensaje recibidos cliente ]: %s', message);
+
        if(mensaje.conexion>=0){
-        var dataconexion='---Usuario: '+mensaje.name+'---Conexion: '+mensaje.conexion+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
+        var dataconexion=' ---Usuario: '+mensaje.name+' ---Conexion: '+mensaje.conexion+' ---Date: '+dia.toString()+' ---Ubicacion: '+mensaje.ip;
         console.log('[conexion]: %s', dataconexion);
        }
 
-        if(mensaje.alarma>0 ){
-        var dataalarma='---Usuario: '+mensaje.name+'---Alarma: '+mensaje.alarma+'---Date: '+dia.toString()+'---Ubicacion: '+mensaje.ip;
+        if(mensaje.alarmasC!==undefined){//esto es nuevo
+        var dataalarma=' ---Usuario: ' +mensaje.name+' ---Alarma: '+mensaje.alarmasC+' ---Date: '+dia.toString()+' ---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
        }
 
