@@ -76,14 +76,15 @@
               }else{
               usuarios[i].ethernet++;
               usuarios[i].date=dateActual;
+             var usuarioE=usuarios[i].name;
+            var ErrorEthernet={};
+            ErrorEthernet.comando='ErrorEthernet';
+            ErrorEthernet.user = usuarioE;
+           ErrorEthernet.contador= usuarios[i].ethernet;
+            ws.send(JSON.stringify(ErrorEthernet)); 
               }
              alert('ethernet' + usuarios[i].ethernet);
-           var usuarioE=usuarios[i].name;
-           var ErrorEthernet={};
-         ErrorEthernet.comando='ErrorEthernet';
-         ErrorEthernet.user = usuarioE;
-         ErrorEthernet.contador= usuarios[i].ethernet;
-         ws.send(JSON.stringify(ErrorEthernet)); 
+          
           }
         }
       
