@@ -32,19 +32,19 @@ wss.on('connection', function(ws) {
         console.log('[received]: %s', message);
 
        if(mensaje.conexion>=0){
-        var dataconexion=' ---Usuario: '+mensaje.name+' ---Conexion: '+mensaje.conexion+' ---Date: '+mensaje.toString()+' ---Ubicacion: '+mensaje.ip;
+        var dataconexion=' ---Usuario: '+mensaje.name+' ---Conexion: '+mensaje.conexion+' ---Date: '+mensaje.date+' ---Ubicacion: '+mensaje.ip;
         console.log('[conexion]: %s', dataconexion);
        }
 
         if(mensaje.alarmasC>0){
-        var dataalarma=' ---Usuario: ' +mensaje.name+' ---Alarma: '+mensaje.alarmasC+' ---Date: '+mensaje.toString()+' ---Ubicacion: '+mensaje.ip;
+        var dataalarma=' ---Usuario: ' +mensaje.name+' ---Alarma: '+mensaje.alarmasC+' ---Date: '+mensaje.date+' ---Ubicacion: '+mensaje.ip;
         console.log('[alarma]: %s', dataalarma);
        }
 
       
         if(mensaje.ErrorEthernet>=0){
         
-        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+mensaje.toString()+'---Ubicacion: '+mensaje.ip;
+        var dataerrorethernet='---Usuario: '+mensaje.name+'---Alarma:ErrorEthernet: '+mensaje.ErrorEthernet+'---Date: '+mensaje.date+'---Ubicacion: '+mensaje.ip;
         console.log('[ErrorEthernet]: %s', dataerrorethernet);
        }
       });
