@@ -132,10 +132,11 @@
       //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
-             
-          if(message.name===usuarioAct.name && message.alarmasC===usuarioAct.alarma){
+            
+          if(message.name===usuarioAct.name){
              creado=true;
              miregistro=usuarioAct.registro;
+             usuarioAct.alarma=message.alarmasC;
             
           };
         };
