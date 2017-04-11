@@ -44,7 +44,8 @@
             registro: indice,
             alarma:message.alarmasC,
             desconexiones:desconexiones_elec,
-            ethernet:Ethernet
+            ethernet:Ethernet,
+            dateConexion:new date().getTime()
          };
        }; 
        
@@ -63,10 +64,18 @@
            }
          }
 
-         if(message.ErrorEthernet>=0){
+        
+        //Comprobamos comexion Ethernet
+         
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuarios[i].name){
+               var dateActual=new date().getTime();
+              if(dateActual-usuario[i].date<=180000){
+               usuarios[i].date=dateActual;
+              }else{
               usuarios[i].ethernet++;
+              usuarios[i].date=dateActual;
+              }
              alert('ethernet' + usuarios[i].ethernet);
            var usuarioE=usuarios[i].name;
            var ErrorEthernet={};
@@ -76,7 +85,7 @@
          ws.send(JSON.stringify(ErrorEthernet)); 
           }
         }
-      }
+      
        
 
 
