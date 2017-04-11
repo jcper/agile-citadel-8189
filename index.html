@@ -50,13 +50,12 @@
        
        //Devuelve inicioConexion al cliente.
         if(message.conexion>=0){
-          alert('prueba1'+ message.conexion);
            for (var i=0; i<usuarios.length; i++){ 
              alert('prueba'+ message.conexion);
              if(message.name===usuarios[i].name){
                usuarios[i].desconexiones++;
                alert('desconexiones' + usuarios[i].desconexiones);
-               var usuariod=message.user;
+               var usuariod=usuarios[i].name;
                var conexion={};
                conexion.comando='conectado';
                conexion.user = usuariod;
@@ -71,7 +70,7 @@
             if(message.name===usuarios[i].name){
               usuarios[i].ethernet++;
              alert('ethernet' + usuarios[i].ethernet);
-           var usuarioE=message.user;
+           var usuarioE=usuarios[i].name;
            var ErrorEthernet={};
          ErrorEthernet.comando='ErrorEthernet';
          ErrorEthernet.user = usuarioE;
