@@ -39,14 +39,14 @@
 
       
         if(message.alarmasC!==undefined){//esto para no crear usuario de la notificacion
-          var dateconexion=new date().getTime();
+         
         var  usuario={
             name: message.name,
             registro: indice,
             alarma:message.alarmasC,
             desconexiones:desconexiones_elec,
             ethernet:Ethernet,
-            dateConexion:dateconexion
+            dateConexion: new Date().getTime()
          };
        }; 
        
@@ -70,7 +70,7 @@
          
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuarios[i].name){
-               var dateActual=new date().getTime();
+               var dateActual=new Date().getTime();
               if(dateActual-usuario[i].date<=180000){
                usuarios[i].date=dateActual;
               }else{
