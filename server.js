@@ -14,7 +14,7 @@ var AlarmaUno=false;
 var mensaje;
 const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
-app.use(express.static(__dirname + '/public'));
+express.use(express.static(__dirname + '/public'));
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
