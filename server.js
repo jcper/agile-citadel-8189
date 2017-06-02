@@ -14,11 +14,17 @@ var AlarmaUno=false;
 var mensaje;
 const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
+app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/views');
+// set the home page route
+app.get('/', function(req, res) {
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
+    // ejs render automatically looks in the views folder
+    res.render('index');
+});
+app.listen(PORT, function() {
+    console.log('Our app is running on http://localhost:' + PORT);
+});
 const wss = new SocketServer({ server });
 
 wss.on('connection', function(ws) {
