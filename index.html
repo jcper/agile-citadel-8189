@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<head>
+ <!-- saved from url=(0030)http://origin.css.gd/demo.html -->
+<html class=" js flexbox" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Sistema integrado de alarmas</title>
+        <meta name="description" content="Demo of CSS Smart Grid">
+        <meta name="author" content="/humans.txt">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <link rel="stylesheet" href="public/css/fonts.css">
+        <link rel="stylesheet" href="public/css/docs.css">
+
+        <script type="text/javascript" async="" id="gauges-tracker" data-site-id="4faf1bdff5a1f501f8000047" src="./Demo — CSS Smart Grid — A Lightweight, Responsive, Mobile First CSS Grid_files/track.js"></script><script type="text/javascript" async="" src="./Demo — CSS Smart Grid — A Lightweight, Responsive, Mobile First CSS Grid_files/ga.js"></script><script src="./Demo — CSS Smart Grid — A Lightweight, Responsive, Mobile First CSS Grid_files/modernizr.js"></script>
+        <script>
+            var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-3625251-12"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();
+            var _gauges=_gauges||[];(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.id="gauges-tracker";a.setAttribute("data-site-id","4faf1bdff5a1f501f8000047");a.src="//secure.gaug.es/track.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();
+        </script>
+    </head>
+</head>
+
+
+<body class="demo">
+        <header id="hd" role="banner">
+            <div class="container">
+                <h1><a title="Homepage" id="brand"><span class="caps">Sistema integrado de alarmas</a></h1>
+                 <a id="fork-it"><img src="./css/imagenes/avatar-logado.png"></span></a>
+              </div><!-- end .container -->
+        </header><!-- end #hd -->
+
+
+     
+
+    
+     <script>
+    
+      var HOST = location.origin.replace(/^http/, 'ws');
+      var ws = new WebSocket(HOST);
+      var server=document.getElementById('server-time');
+      var indice=1;
+      var indiceTB=1;
+      var indiceN=1;
+      var usuarios=[];
+      var creado=false;
+      var miregistro=1;
+      var nopintarN=false;
+      var comandoRecRestaurar=false;
+      var comandoRecDesactivar=false;
+      var comandoRecBuscar=false; 
+      var comandoRecNotificar=false;
+      var desconexiones_elec=0;
+      var Ethernet=0;
+      ws.onmessage = function (event) {
+   
+      var table = document.getElementById('myTable');
+        var message = JSON.parse(event.data);
+        if(message.name!==undefined || message.alarmasC!==undefined ){
+
+      
+        if(message.alarmasC!==undefined){//esto para no crear usuario de la notificacion
+         
+        var  usuario={
+            name: message.name,
+            registro: indice,
+            alarma:message.alarmasC,
+            desconexiones:desconexiones_elec,
+            ethernet:Ethernet,
+            dateConexion: new Date().getTime()
+         };
+       }; 
+       
+       //Devuelve inicioConexion al cliente.
+        if(message.conexion>=0){
+           for (var i=0; i<usuarios.length; i++){ 
+             if(message.name===usuarios[i].name){
+               usuarios[i].desconexiones++;
+               var usuariod=usuarios[i].name;
+               var conexion={};
+               conexion.comando='conectado';
+               conexion.user = usuariod;
+               conexion.contador=usuarios[i].desconexiones;
+              ws.send(JSON.stringify(conexion));
+             }
+           }
+         }
+
+        
+        //Comprobamos comexion Ethernet
+         
+          for (var i=0; i<usuarios.length; i++){
+            if(message.name===usuarios[i].name){
+               var dateActual=new Date().getTime();
+              if(dateActual-usuarios[i].dateConexion<=120000){
+               usuarios[i].dateConexion=dateActual;
+              }else{
+              usuarios[i].ethernet++;
+            var usuarioE=usuarios[i].name;
+            var ErrorEthernet={};
+            ErrorEthernet.comando='ErrorEthernet';
+            ErrorEthernet.user = usuarioE;
+           ErrorEthernet.contador= usuarios[i].ethernet;
+            ws.send(JSON.stringify(ErrorEthernet)); 
+            usuarios[i].dateConexion=dateActual;
+              }
+             
+          
+          }
+        }
+      
+       
+
+
+
+       if(message.comando==='notificar0' || message.comando==='buscar' || message.comando==='restaurar' || message.comando==='desactivar') {
+       if(message.comando==='notificar0'){
+           var comandoRecNotificar=true; 
+       };
+        if(message.comando==='buscar'){
+           var comandoRecBuscar=true; 
+       }
+
+        if(message.comando==='restaurar'){
+           var comandoRecRestaurar=true; 
+       }
+
+        if(message.comando==='desactivar'){
+           var comandoRecDesactivar=true; 
+       }
+
+        var table2=document.getElementById('myTable2');
+         if(indiceN==1){
+        var row = table2.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.comando;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        indiceN++;
+     
+       }else{
+         var row = table2.insertRow(indiceN);  
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.comando;
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        indiceN++;
+       };
+        nopintarN=true;//Esto booleano no escribe la notificacion en los equipos en curso.
+
+     };
+    
+      //if (indice!==1){
+        for (var i=0; i<usuarios.length; i++){
+             var usuarioAct=usuarios[i];
+            
+          if(message.name===usuarioAct.name){
+             creado=true;
+             miregistro=usuarioAct.registro;
+             usuarioAct.alarma=message.alarmasC;
+            
+          };
+        };
+       
+        if(!nopintarN){
+        if(creado){
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando!==undefined){
+         document.getElementById("myTable").deleteRow(miregistro);
+        var row =  table.insertRow(miregistro);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.alarmasC[0]+','+message.alarmasC[1]+','+message.alarmasC[2];
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        creado=false;
+        indice++;
+        };
+          }else{
+        if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined ||message.comando!==undefined){
+        usuarios.push(usuario);
+        indice++;
+        var row = table.insertRow(indiceTB);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML = message.alarmasC[0]+','+message.alarmasC[1]+','+message.alarmasC[2];
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        indiceTB++;
+             };
+          };
+        };
+      };
+        nopintarN=false;
+
+      };
+
+    
+
+      function sendMessageRestaurar() {
+        var comando1={};
+         comando1.comando='restaurar';
+         comando1.user = document.getElementById("restaurar").value;
+        ws.send(JSON.stringify(comando1));
+         var tiempoComandoR=new Date();
+         var d_restaurar=tiempoComandoR.getTime()+60000;
+         var contadorR=0;
+         while(contadorR<3){
+          var timeoutR=new Date();
+          var TimeoutR=timeoutR.getTime();
+          if(TimeoutR<d_restaurar){
+          if(comandoRecRestaurar){
+         document.getElementById("restaurar").value = "";//Se limpia el buffer 
+         contadorR=3;
+           comandoRecRestaurar=false;
+            }else{
+           document.getElementById("restaurar").value = 'wait';
+             ws.send(JSON.stringify(comando1));
+           contadorR++;
+          }
+         }else{
+             document.getElementById("restaurar").value = 'timeout';
+              comandoRecRestaurar=false;
+         }
+        }
+         document.getElementById("restaurar").value = "";
+          comandoRecRestaurar=false;
+        }
+
+      
+    
+      function sendMessageNotificar() {
+        var comando2={};
+        comando2.comando='notificar';
+        comando2.user = document.getElementById("notificar").value;
+        ws.send(JSON.stringify(comando2));
+         var tiempoComandoN=new Date();
+         var d_notificar=tiempoComandoN.getTime()+60000;
+         var contadorN=0;
+         while(contadorN<3){
+          var timeoutN=new Date();
+          var TimeoutN=timeoutN.getTime();
+          if(TimeoutN<d_notificar){
+          if(comandoRecNotificar){
+         document.getElementById("notificar").value = "";//Se limpia el buffer 
+         contadorN=3;
+           comandoRecNotificar=false;
+            }else{
+           document.getElementById("notificar").value = 'wait';
+             ws.send(JSON.stringify(comando2));
+           contadorN++;
+          }
+         }else{
+             document.getElementById("notificar").value = 'timeout';
+              comandoRecNotificar=false;
+         }
+        }
+         document.getElementById("notificar").value = "";
+          comandoRecNotificar=false;
+      }
+
+
+       function sendMessageDesactivacion() {
+        var comando4={};
+        comando4.comando='desactivar';
+        comando4.user = document.getElementById("notificar").value;
+        ws.send(JSON.stringify(comando4));
+        var tiempoComando=new Date();
+        var d_desactivar=tiempoComando.getTime()+60000;
+        var contador=0;
+        while(contador<3){
+          var timeoutD=new Date();
+          var TimeoutD=timeoutD.getTime();
+          if(TimeoutD<d_desactivar){
+          if(comandoRecDesactivar){
+         document.getElementById("notificar").value = "";//Se limpia el buffer 
+         contador=3;
+           comandoRecDesactivar=false;
+            }else{
+           document.getElementById("notificar").value = 'wait';
+             ws.send(JSON.stringify(comando4));
+           contador++;
+          }
+         }else{
+             document.getElementById("notificar").value = 'timeout';
+              comandoRecDesactivar=false;
+         }
+        }
+         document.getElementById("notificar").value = "";
+          comandoRecDesactivar=false;
+        }
+
+      
+
+        function sendMessageBuscar() {
+        var comando3 ={};
+        comando3.comando='buscar';
+        comando3.user = document.getElementById("buscar").value;
+        ws.send(JSON.stringify(comando3));
+        var tiempoComandoB=new Date();
+        var d=tiempoComandoB.getTime()+60000;
+        var contadorB=0;
+         while(contadorB<3){
+          var timeout=new Date();
+          var Timeout=timeout.getTime();
+        if(Timeout<d ){
+          if(comandoRecBuscar){
+         document.getElementById("buscar").value = "";//Se limpia el buffer 
+         contadorB=3;
+           comandoRecBuscar=false;
+            }else{
+           document.getElementById("buscar").value = 'wait';
+             ws.send(JSON.stringify(comando3));
+             contadorB++;
+          }
+         }else{
+             document.getElementById("buscar").value = 'timeout';
+              comandoRecBuscar=false;
+         }
+        }
+         document.getElementById("buscar").value = "";
+          comandoRecBuscar=false;
+      }
+
+
+
+    </script> 
+  </div>
+
+  <div class="container row" id="content">
+            
+          <div class="row">
+                <div class="columns four">
+                <b>Busqueda de Equipo
+                 <hr {
+                    height: 1px;
+                    border: 1;
+                    background-color:#464646;
+                  }>
+                 <p id="Texto_Int">Introduce nombre Equipo</p>
+                 <p><input type="text" class="form-control" id="buscar" style="width:100%"></p>
+                 <button type="button" class="btn btn-success" style="width:50%" onclick="sendMessageBuscar()">buscar</button>
+                 <p id="Texto_Int1">Equipos en curso</p>
+                 <table id='myTable'>
+               <tr>
+                <th>Equipo</th>
+                <th>Alarmas</th>
+                <th>Fecha</th>
+                <th>Ubicacion</th>
+               <tr>
+               </table>
+                 </b>
+                </div>
+                <div class="columns four"><b>Restauracion de Equipo
+                  <hr {
+                    height: 1px;
+                    border: 1;
+                    background-color:#464646;
+                  }>
+                 <p id="Texto_Int">Introduce nombre Equipo</p>
+                 <p><input type="text" class="form-control" id="restaurar" style="width:100%"></p>
+                 <button type="button" class="btn btn-success" style="width:50%" onclick="sendMessageRestaurar()">Restaurar</button>
+                 <p id="Texto_Int1">Tipos de Alarmas</p>
+                 <table>
+               <tr>
+                  <th>Tipo</th>
+                  <th>Nivel</th>
+                  <th>Optimo</th>
+               <tr>
+
+                <tr>
+                  <td>Alarma 0</td>
+                  <td>Sin alarma, Agora activo</td>
+                  <td>Ram Libre +1gb/Cpu Load <80%</td>
+                </tr>
+              <tr>
+                 <td>Alarma 1</td>
+                 <td>CPU 80%</td>
+                 <td>CPU 50%</td>
+              </tr>
+            <tr>
+                <td>Alarma 2</td>
+                <td>Ram Libre 1gb</td>
+                <td>Ram Libre 1,5gb</td>
+           </tr>
+             <tr>
+                <td>Alarma 3</td>
+                <td>Ram Libre -1gb/Cpu Load -80%</td>
+                <td>Alarma 1 y 2 activadas</td>
+            </tr>
+          <tr>
+              <td>Alarma 4</td>
+              <td>Servicio Agora</td>
+              <td>Alarma 0</td>
+          </tr>
+         <tr>
+            <td>Alarma 5</td>
+            <td>Desconexion electrica</td>
+            <td>2 desconexiones</td>
+          </tr>
+      <tr>
+        <td>Alarma 6</td>
+        <td>Desconexion ethernet</td>
+        <td>10 desconexiones</td>
+      </tr>
+          </table>
+        </b></div>
+        <div class="columns four"><b>Notificaciones
+         <hr {
+                    height: 1px;
+                    border: 1;
+                    background-color:#464646;
+                  }>
+                 <p id="Texto_Int">Introduce nombre Equipo</p>
+                 <p><input type="text" class="form-control" id="notificar" style="width:100%"></p>
+            <button type="button" class="btn btn-success" style="width:50%" onclick="sendMessageNotificar()">Notificar</button>
+            <button type="button" class="btn btn-success" style="width:50%" onclick="sendMessageDesactivacion()">Desactivar</button>
+                 <p id="Texto_Int1">Equipos en curso</p>
+                 <table id='myTable2'>
+               <tr>
+                <th>Equipo</th>
+                <th>Alarmas</th>
+                <th>Fecha</th>
+                <th>Ubicacion</th>
+               <tr>
+               </table>
+         </b></div>
+
+           
+            
+           
+
+        </div><!-- end #content -->
+
+        <footer id="ft" role="contentinfo">
+            <div class="container">
+               
+                <p class="license row">
+                    <span class="columns three-fourths">Informaticajcper</a>
+                    </span>
+                </p>
+            </div><!-- end .container -->
+        </footer><!-- end #ft -->
+    
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
