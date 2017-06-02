@@ -3,6 +3,7 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
+var app = express();
 var fs = require('fs');
 var alarma;
 var TiempoEspera=600000;
@@ -14,7 +15,7 @@ var AlarmaUno=false;
 var mensaje;
 const PORT = process.env.PORT || 3001;
 const INDEX = path.join(__dirname, 'index.html');
-express.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
