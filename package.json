@@ -7,7 +7,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+   "start": "node server.js",
+   "postinstall": "grunt uncss"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +21,13 @@
     "pug": "^2.0.0-rc.2",
     "utf-8-validate": "1.2.1",
     "ws": "^1.1.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-uncss": "^0.6.1"
   }
 }
