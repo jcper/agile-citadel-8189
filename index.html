@@ -336,8 +336,7 @@
   </div>
 
   <div class="container row" id="content">
-            
-          <div class="row">
+             <div class="row">
                 <div class="columns four" align="center">
                 <h1>Busqueda de Equipo</h1>
                  <hr {
@@ -347,7 +346,7 @@
                   }>
                  <p id="Texto_Int">Introduce nombre Equipo</p>
                  <p><input type="text" class="form-control" id="buscar" style="height: 36px; width: 360px"></p>
-                 <p align="right"><button type="button"  style="height: 36px; width: 170px" onclick="sendMessageBuscar()">buscar
+                 <p align="right"><button type="button" class="buttonBuscar" onclick="sendMessageBuscar()">BUSCAR
                  </button></p>
                  <p id="Texto_Int1">Equipos en curso</p>
                  <table id='myTable'>
@@ -372,7 +371,7 @@
                   }>
                  <p id="Texto_Int">Introduce nombre Equipo</p>
                  <p><input type="text" class="form-control" id="restaurar" style="height: 36px; width: 360px"><p>
-                  <p align="right"><button type="button" class="btn btn-success" style="height: 36px; width: 160px" onclick="sendMessageRestaurar()">Restaurar</button></p>
+                  <p align="right"><button type="button" class="buttonRestaurar" style="height: 36px; width: 160px" onclick="sendMessageRestaurar()">RESTAURAR</button></p>
     
                  <p id="Texto_Int1">Tipos de Alarmas</p>
                  <table>
@@ -432,8 +431,8 @@
                  <p id="Texto_Int">Introduce nombre Equipo</p>
                  <p align="center"><input type="text" class="form-control" id="notificar" style="height: 36px; width: 360px"></p>
             <p>
-            <button type="button" class="btn btn-success" style="height: 36px; width: 160px" onclick="sendMessageNotificar()">Notificar</button>&nbsp&nbsp
-            <button type="button" class="btn btn-success"  style="height: 36px; width: 160px" onclick="sendMessageDesactivacion()">Desactivar</button></p>
+            <button  class="buttonNotificar"  onclick="sendMessageNotificar()">NOTIFICAR</button>&nbsp&nbsp
+            <button  class="buttonDesactivar" onclick="sendMessageDesactivacion()">DESACTIVAR</button></p>
             
                  <p id="Texto_Int1">Notificaciones en curso</p>
                  <table id='myTable2'>
@@ -447,13 +446,14 @@
                 </tbody>
 
                </table>
-             </b></div>
+               <p></p>
+             </div>
              
              
              </div>
 
            </div><!-- end #content -->
-           <p></p>
+          
          </div> 
 
          </div>
