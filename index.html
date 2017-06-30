@@ -20,7 +20,7 @@
 <body class="demo">
         <header id="hd" role="banner">
             <div class="container">
-                <h1><a title="Homepage" id="brand"><span class="caps">Sistema integrado de alarmas</a></h1>
+                <h1><a title="Homepage" id="brand"><span>Sistema integrado de alarmas</a></h1>
                  <a id="fork-it"><img src="https://dl.dropbox.com/s/bu30drfx1lab29h/avatar-logado.png">
                     <h4 style="-moz-border-radius-bottomright: 20px; -moz-border-radius-topright: 20;bottom: 5px; color: white; margin: 0;padding: 5px 10px; position: absolute; width: 1090px;">
                       AVHESSTRES</span></a>
@@ -97,7 +97,7 @@
             var ErrorEthernet={};
             ErrorEthernet.comando='ErrorEthernet';
             ErrorEthernet.user = usuarioE;
-           ErrorEthernet.contador= usuarios[i].ethernet;
+            ErrorEthernet.contador= usuarios[i].ethernet;
             ws.send(JSON.stringify(ErrorEthernet)); 
             usuarios[i].dateConexion=dateActual;
               }
@@ -424,7 +424,7 @@
          <p></p>
         </div>
         <div class="columns four">
-         <p class="titulocaja">Notificaciones </p>
+         <p class="titulocaja">Notificaciones de Equipo </p>
            <hr {
                     height: 1px;
                     border: 1;   
