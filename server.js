@@ -3,7 +3,7 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
-var app = express();
+const app = express();
 var fs = require('fs');
 var alarma;
 var TiempoEspera=600000;
