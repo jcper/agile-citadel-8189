@@ -20,8 +20,9 @@ const INDEX = path.join(__dirname, 'index.html');
 
 const server = express().
   get('/test', function (req, res){
-  var arduino=req.param('led');
-  console.log('Arduino: '+arduino)})
+  var arduino=req.params('led');
+  console.log('Arduino: '+arduino);
+  res.send('Alarma Arduino recibida')})
  .use((req, res) => res.sendFile(INDEX))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
  
