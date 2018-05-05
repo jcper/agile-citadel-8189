@@ -13,6 +13,8 @@
         <meta name="author" content="/humans.txt">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
        </head>
 
 
@@ -42,11 +44,6 @@
       var usuarios=[];
       var creado=false;
       var miregistro=1;
-      var nopintarN=false;
-      var comandoRecRestaurar=false;
-      var comandoRecDesactivar=false;
-      var comandoRecBuscar=false; 
-      var comandoRecNotificar=false;
       var desconexiones_elec=0;
       var Ethernet=0;
       ws.onmessage = function (event) {
@@ -81,10 +78,10 @@
               ws.send(JSON.stringify(conexion));
              }
            }
-         }
+         };
 
         
-        //Comprobamos comexion Ethernet
+        //Comprobamos conexion Ethernet
          
           for (var i=0; i<usuarios.length; i++){
             if(message.name===usuarios[i].name){
@@ -104,73 +101,49 @@
              
           
           }
-        }
+        };
       
        
 
 
 
-       if(message.comando==='notificar0' || message.comando==='buscar' || message.comando==='restaurar' || message.comando==='desactivar') {
-       if(message.comando==='notificar0'){
-           var comandoRecNotificar=true; 
-       };
-        if(message.comando==='buscar'){
-           var comandoRecBuscar=true; 
-       }
-
-        if(message.comando==='restaurar'){
-           var comandoRecRestaurar=true; 
-       }
-
-        if(message.comando==='desactivar'){
-           var comandoRecDesactivar=true; 
-       }
-
-        var table2=document.getElementById('myTable2');
-         if(indiceN==1){
-        var row = table2.insertRow(1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = message.name;
-        cell2.innerHTML = message.comando;
-        cell3.innerHTML = message.date;
-        cell4.innerHTML = message.ip;
-        indiceN++;
      
-       }else{
-         var row = table2.insertRow(indiceN);  
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = message.name;
-        cell2.innerHTML = message.comando;
-        cell3.innerHTML = message.date;
-        cell4.innerHTML = message.ip;
-        indiceN++;
-       };
-        nopintarN=true;//Esto booleano no escribe la notificacion en los equipos en curso.
+      
 
-     };
+      
     
-      //if (indice!==1){
         for (var i=0; i<usuarios.length; i++){
              var usuarioAct=usuarios[i];
             
           if(message.name===usuarioAct.name){
              creado=true;
-             miregistro=usuarioAct.registro;
-             usuarioAct.alarma=message.alarmasC;
-            
+          miregistro=usuarioAct.registro;
+          usuarioAct.alarma=usuarioAct.alarmasC;
+
+        if(message.comando!=undefined){
+        document.getElementById("myTable").deleteRow(miregistro);
+        var row =  table.insertRow(miregistro);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell1.innerHTML = message.name;
+        cell2.innerHTML =  usuarioAct.alarma[0]+','+ usuarioAct.alarma[1]+','+ usuarioAct.alarma[2];
+        cell3.innerHTML = message.date;
+        cell4.innerHTML = message.ip;
+        cell5.innerHTML = message.comando;
+        creado=false;
+        indice++;
+         }
+
           };
         };
        
-        if(!nopintarN){
+      
         if(creado){
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip !==undefined || message.comando!==undefined){
-         document.getElementById("myTable").deleteRow(miregistro);
+        document.getElementById("myTable").deleteRow(miregistro);
         var row =  table.insertRow(miregistro);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -182,7 +155,7 @@
         cell4.innerHTML = message.ip;
         creado=false;
         indice++;
-        };
+        }
           }else{
         if(message.name !==undefined || message.alarma !==undefined || message.date!==undefined || message.ip!==undefined ||message.comando!==undefined){
         usuarios.push(usuario);
@@ -197,20 +170,19 @@
         cell3.innerHTML = message.date;
         cell4.innerHTML = message.ip;
         indiceTB++;
-             };
+             }
           };
-        };
-      };
-        nopintarN=false;
+      
+       
 
-      };
+    
 
     
 
       function sendMessageRestaurar() {
         var comando1={};
          comando1.comando='restaurar';
-         comando1.user = document.getElementById("restaurar").value;
+         comando1.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando1));
          var tiempoComandoR=new Date();
          var d_restaurar=tiempoComandoR.getTime()+60000;
@@ -220,20 +192,20 @@
           var TimeoutR=timeoutR.getTime();
           if(TimeoutR<d_restaurar){
           if(comandoRecRestaurar){
-         document.getElementById("restaurar").value = "";//Se limpia el buffer 
+         document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorR=3;
            comandoRecRestaurar=false;
             }else{
-           document.getElementById("restaurar").value = 'wait';
+           document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando1));
            contadorR++;
           }
          }else{
-             document.getElementById("restaurar").value = 'timeout';
+             document.getElementById("buscar").value = 'timeout';
               comandoRecRestaurar=false;
          }
         }
-         document.getElementById("restaurar").value = "";
+         document.getElementById("buscar").value = "";
           comandoRecRestaurar=false;
         }
 
@@ -242,7 +214,7 @@
       function sendMessageNotificar() {
         var comando2={};
         comando2.comando='notificar';
-        comando2.user = document.getElementById("notificar").value;
+        comando2.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando2));
          var tiempoComandoN=new Date();
          var d_notificar=tiempoComandoN.getTime()+60000;
@@ -252,20 +224,20 @@
           var TimeoutN=timeoutN.getTime();
           if(TimeoutN<d_notificar){
           if(comandoRecNotificar){
-         document.getElementById("notificar").value = "";//Se limpia el buffer 
+         document.getElementById("buscar").value = "";//Se limpia el buffer 
          contadorN=3;
            comandoRecNotificar=false;
             }else{
-           document.getElementById("notificar").value = 'wait';
+           document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando2));
            contadorN++;
           }
          }else{
-             document.getElementById("notificar").value = 'timeout';
+             document.getElementById("buscar").value = 'timeout';
               comandoRecNotificar=false;
          }
         }
-         document.getElementById("notificar").value = "";
+         document.getElementById("buscar").value = "";
           comandoRecNotificar=false;
       }
 
@@ -273,7 +245,7 @@
        function sendMessageDesactivacion() {
         var comando4={};
         comando4.comando='desactivar';
-        comando4.user = document.getElementById("notificar").value;
+        comando4.user = document.getElementById("buscar").value;
         ws.send(JSON.stringify(comando4));
         var tiempoComando=new Date();
         var d_desactivar=tiempoComando.getTime()+60000;
@@ -283,20 +255,20 @@
           var TimeoutD=timeoutD.getTime();
           if(TimeoutD<d_desactivar){
           if(comandoRecDesactivar){
-         document.getElementById("notificar").value = "";//Se limpia el buffer 
+         document.getElementById("buscar").value = "";//Se limpia el buffer 
          contador=3;
            comandoRecDesactivar=false;
             }else{
-           document.getElementById("notificar").value = 'wait';
+           document.getElementById("buscar").value = 'wait';
              ws.send(JSON.stringify(comando4));
            contador++;
           }
          }else{
-             document.getElementById("notificar").value = 'timeout';
+             document.getElementById("buscar").value = 'timeout';
               comandoRecDesactivar=false;
          }
         }
-         document.getElementById("notificar").value = "";
+         document.getElementById("buscar").value = "";
           comandoRecDesactivar=false;
         }
 
@@ -338,43 +310,17 @@
   </div>
 
   <div class="container row" id="content">
-             <div class="row">
-                <div class="columns four">
-                <p class="titulocaja">Busqueda de Equipo</p>
-                 <hr size="3">
-                 <p id="Texto_Int">Introduce nombre Equipo</p>
-                 <p><input type="text" class="inputcaja" id="buscar" ></p>
-                 <p><button class="buttonBuscar" onclick="sendMessageBuscar()">BUSCAR
-                 </button></p>
-                 <p id="Texto_Int1">Equipos en curso</p>
-                 <table id='myTable'>
-               <tr>
-                <th>Equipo</th>
-                <th>Alarmas</th>
-                <th>Fecha</th>
-                <th>Ubicacion</th>
-               <tr>
-               <tbody>
-                 
-               </tbody>
-               </table>
-                <p></p>
-                </div>
-                <div class="columns four">
-                <p class="titulocaja">Restauracion de Equipo</p>
-                  <hr size="3">
-                 <p id="Texto_Int">Introduce nombre Equipo</p>
-                 <p><input type="text" class="inputcaja"  id="restaurar" ><p>
-                  <p><button type="button" class="buttonRestaurar"  onclick="sendMessageRestaurar()">RESTAURAR</button></p>
-    
-                 <p id="Texto_Int1">Tipos de Alarmas</p>
+              <div class="columns four">
+               
+                <p class="titulocaja">Tipos de Alarmas</p>
                  <table>
+                 <tbody>
                <tr>
                   <th>Tipo</th>
                   <th>Nivel</th>
                   <th>Optimo</th>
-               <tr>
-                <tbody>
+               </tr>
+               
                 <tr>
                   <td>Alarma 0</td>
                   <td>Sin alarma, Agora activo</td>
@@ -389,8 +335,7 @@
                 <td>Alarma 2</td>
                 <td>Ram Libre 1gb</td>
                 <td>Ram Libre 1,5gb</td>
-              <tr>
-           
+              </tr>
               <tr>
                 <td>Alarma 3</td>
                 <td>Ram Libre -1gb/Cpu Load -80%</td>
@@ -406,7 +351,7 @@
             <td>Desconexion electrica</td>
             <td>2 desconexiones</td>
           </tr>
-      <tr>
+        <tr>
         <td>Alarma 6</td>
         <td>Desconexion ethernet</td>
         <td>10 desconexiones</td>
@@ -415,43 +360,53 @@
           </table>
          <p></p>
         </div>
-        <div class="columns four">
-         <p class="titulocaja">Notificaciones de Equipo </p>
-           <hr size="3">
-                 <p id="Texto_Int">Introduce nombre Equipo</p>
-                 <p><input type="text" class="inputcaja" id="notificar" ></p>
-            <p>
-            <button  class="buttonNotificar"  onclick="sendMessageNotificar()">NOTIFICAR</button>&nbsp&nbsp
-            <button  class="buttonDesactivar" onclick="sendMessageDesactivacion()">DESACTIVAR</button></p>
-            
-                 <p id="Texto_Int1">Notificaciones en curso</p>
-                 <table id='myTable2'>
-               <tr>
+
+                <div class="columns four">
+               <p class="titulocaja" >Equipos en curso</p>
+                <table id='myTable'>
+                <tr>
                 <th>Equipo</th>
                 <th>Alarmas</th>
-                <th>Fecha</th>
-                <th>Ubicacion</th>
-               </tr> 
-                <tbody>
+                <th>Status</th>
+                <th>IP publica</th>
+                <th>Comando</th>
+               </tr>
+               <tbody>
+
                 </tbody>
-
                </table>
-               <p></p>
-             </div>
-             
-             
-             </div>
+              </div> 
+               
 
-           </div><!-- end #content -->
+                <div class="columns four">
+                <p class="titulocaja">Comandos remotos</p>
+                 <hr size="3">
+                 <p id="Texto_Int">Introduce nombre Equipo</p>
+                 <p><input type="text" class="inputcaja" id="buscar" ></p>
+                 <p><button class="buttonBuscar" onclick="sendMessageBuscar()">BUSCAR
+                 </button></p>
+                  <p><button type="button" class="buttonRestaurar"  onclick="sendMessageRestaurar()">RESTAURAR</button></p>
+                  <p> &nbsp;&nbsp;<button  class="buttonDesactivar" onclick="sendMessageDesactivacion()">DESACTIVAR</button>
+                  &nbsp;&nbsp;<button  class="buttonNotificar"  onclick="sendMessageNotificar()">NOTIFICAR</button></p>
+                 
+                <p></p>
+                </div>
+             
+            
           
-         </div> 
-
-         </div>
-
-         </div>
-        </div>
-
+                 
+         </div><!-- end #content -->
+      </div> 
+     </div>
     </div>
+   </div>
+ </div>
+       
+       
+     
+         
+
+
   </body>
 </html>
 
